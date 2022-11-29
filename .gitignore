@@ -1,0 +1,30 @@
+# Lavavel
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+
+# Enviroment
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
+
+# IDEs
+/.fleet
+/.idea
+/.vscode
+
+# Nodejs
+npm-debug.log
+yarn-error.log
+.nuxt
+.nitro
+.cache
+.output
+.yarn
+/node_modules
