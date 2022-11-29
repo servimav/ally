@@ -30,7 +30,7 @@ class AuthController extends Controller
             'password' => ['required', 'string'],
         ]);
         if ($validator->fails()) {
-            return $this->sendErrorReponse();
+            return $this->sendErrorReponse($validator->errors());
         }
         $validator = $validator->validate();
 
