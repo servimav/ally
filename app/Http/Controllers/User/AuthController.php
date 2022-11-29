@@ -54,14 +54,11 @@ class AuthController extends Controller
             'password' => ['required', 'confirmed', 'string']
         ]);
         if ($validator->fails()) {
-            return $this->sendErrorReponse();
+            return $this->sendErrorReponse($validator->errors());
         }
         $validator = $validator->validate();
-        $user = new User([
-            'name' => $validator['name'],
-            'email' => $validator['email'],
-            'password' => bcrypt($validator['password'])
-        ]);
+        $validator['password'] = bcrypt($validator['password']);
+        $user = new User($validator);
         return $user->save()
             ? $this->authResponse($user)
             : $this->sendErrorReponse();
@@ -79,6 +76,7 @@ class AuthController extends Controller
      */
     private function authResponse(User $user)
     {
+        $user->role;
         return [
             'profile' => new UserResource($user),
             'token' => $user->createToken('API_TOKEN')->plainTextToken
