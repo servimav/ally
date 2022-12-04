@@ -1,17 +1,18 @@
 <script setup lang='ts'>
-
+import OverlayVue from '@/components/containers/Overlay.vue'
 defineProps<{ modelValue: boolean }>()
 defineEmits<{ (e: 'update:model-value', v: boolean): void }>();
 </script>
 
 <template>
-    <div class="navbar-menu relative">
+    <div class="z-20 navbar-menu relative ">
         <nav :class="{ 'show': modelValue }"
-            class="pt-[6rem] lg:translate-x-0 sidebar h-screen fixed left-0 top-0 flex w-72 -translate-x-full flex-col overflow-y-auto bg-primary-low pb-8 sm:max-w-sm">
+            class="pt-[6rem] lg:translate-x-0 sidebar h-screen fixed left-0 top-0 flex w-64 -translate-x-full flex-col overflow-y-auto bg-primary-low dark:bg-primary pb-8 sm:max-w-sm">
             <slot></slot>
         </nav>
     </div>
-    <div class="h-screen bg-transparent sm:hidden" @click="$emit('update:model-value', false)"></div>
+    <!-- <div class="h-screen bg-transparent sm:hidden" v-if="modelValue" @click="$emit('update:model-value', false)"></div> -->
+    <OverlayVue :model-value="modelValue" @update:model-value="v => $emit('update:model-value', v)" />
     <div class="mx-auto lg:ml-80"></div>
 </template>
 

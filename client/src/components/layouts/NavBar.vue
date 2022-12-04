@@ -1,6 +1,7 @@
 <script setup lang='ts'>
-import { mdiMenu, mdiClose, mdiAccount } from '@mdi/js';
+import { mdiMenu, mdiClose, mdiAccount, mdiGithub } from '@mdi/js';
 import { ref } from 'vue';
+import ProfileMenu from '@/components/popups/ProfileMenu.vue';
 
 defineProps<{ sidebarMenu: boolean }>()
 const $emit = defineEmits<{ (e: 'update:sidebarMenu', val: boolean): void }>()
@@ -69,9 +70,19 @@ const profileMenu = ref(false);
                     </div>
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
+                    <div class="hidden md:block">
+                        <button type="button"
+                            class="inline-flex items-center justify-center rounded-md p-2 text-gray-400">
+                            <span class="sr-only">Github</span>
+                            <svg class="block h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" :d="mdiGithub" />
+                            </svg>
+                        </button>
+                    </div>
                     <!-- Profile dropdown -->
                     <div class="relative ml-3">
+
                         <div>
                             <button type="button"
                                 class="inline-flex items-center justify-center rounded-md p-2 text-gray-400"
@@ -85,20 +96,8 @@ const profileMenu = ref(false);
                             </button>
                         </div>
 
-                        <div :class="{ 'hidden': !profileMenu }"
-                            class="absolute right-0 z-40 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg"
-                            role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                            <!-- Active: "bg-gray-100", Not Active: "" -->
-                            <div class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1">Your
-                                Profile</div>
-                            <div class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1">Settings
-                            </div>
-                            <div class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1">Sign out
-                            </div>
-                        </div>
-                        <div v-if="profileMenu" class="fixed top-0 left-0 w-screen h-screen bg-transparent"
-                            @click="profileMenu = !profileMenu">
-                        </div>
+                        <ProfileMenu v-model="profileMenu" close-outside />
+
                     </div>
                 </div>
             </div>

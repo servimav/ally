@@ -1,19 +1,30 @@
-export interface ITheme {
-    primary: string;
-    primaryLow: string;
-    secondary: string;
-    secondaryLow: string;
-    active: string;
-    positive: string;
-    negative: string;
-    info: string;
-    warning: string;
-    accent: string;
-}
+export function useTheme() {
+    /**
+     * saveOnLocalStorage
+     * @param val
+     */
+    function saveOnLocalStorage(val: 'dark' | 'light') {
+        localStorage.setItem('themeDark', val);
+    }
+    return {
+        setDark: () => {
+            document.documentElement.classList.add('dark');
+            saveOnLocalStorage('dark');
+        },
+        setLight: () => {
+            document.documentElement.classList.remove('dark')
+            saveOnLocalStorage('light');
+        },
+        toggleDark: () => {
+            const dark = document.documentElement.classList.toggle('dark');
+            if (dark) return saveOnLocalStorage('dark');
+            else saveOnLocalStorage('light');
 
-/**
- * Theme
- */
-export const Theme: Partial<ITheme> = {
-
+        },
+        is: (): 'dark' | 'light' => {
+            const dark = localStorage.getItem('themeDark');
+            if (dark) return dark as 'dark' | 'light';
+            return 'light';
+        }
+    }
 }

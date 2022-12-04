@@ -1,11 +1,11 @@
 <script setup lang='ts'>
 import { computed } from 'vue';
-import { RouteLocationNormalized, useRoute, useRouter } from 'vue-router';
-import BaseIcon from '../BaseIcon.vue';
+import { RouteLocationRaw, useRoute, useRouter } from 'vue-router';
+import BaseIcon from '../../BaseIcon.vue';
 
 const $router = useRouter();
 const $route = useRoute();
-const $props = defineProps<{ label?: string; to?: RouteLocationNormalized, href?: string; icon?: string }>();
+const $props = defineProps<{ label?: string; to?: RouteLocationRaw, href?: string; icon?: string }>();
 
 const active = computed(() => $props.to && $route == $props.to)
 
