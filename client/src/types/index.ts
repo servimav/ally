@@ -5,3 +5,6 @@ export interface IIconLabelLink {
     label?: string;
     link?: RouteLocationRaw;
 }
+
+
+export * from './user'

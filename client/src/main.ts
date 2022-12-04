@@ -5,14 +5,17 @@ import { router } from './router';
 import App from './App.vue';
 import CardVue from '@/components/containers/Card.vue';
 import BaseIconVue from './components/BaseIcon.vue';
+import InputText from './components/forms/inputs/InputText.vue';
 
 const pinia = createPinia();
 
 const app = createApp(App);
 
-app.use(router);
 app.use(pinia);
+app.use(router);
+
 app.component('Card', CardVue);
 app.component('BaseIcon', BaseIconVue);
+app.component('InputText', InputText);
 
 app.mount('#app');

@@ -1,6 +1,10 @@
 <script setup lang='ts'>
 import AuthLogin from '@/components/forms/auth/AuthLogin.vue';
+import AuthRegister from '@/components/forms/auth/AuthRegister.vue';
 import SocialAuth from '@/components/forms/auth/SocialAuth.vue';
+import { ref } from 'vue';
+
+const login = ref(true);
 </script>
 
 <template>
@@ -16,7 +20,9 @@ import SocialAuth from '@/components/forms/auth/SocialAuth.vue';
                             </a>
                         </div>
 
-                        <AuthLogin />
+                        <AuthLogin v-if="login" />
+                        <AuthRegister v-else />
+
 
                         <SocialAuth />
 
@@ -26,7 +32,7 @@ import SocialAuth from '@/components/forms/auth/SocialAuth.vue';
                         </a>
                         <p class="text-base text-[#adadad]">
                             Not a member yet?
-                            <a href="javascript:void(0)" class="text-white hover:underline">
+                            <a href="javascript:void(0)" @click="login = !login" class="text-white hover:underline">
                                 Sign Up
                             </a>
                         </p>

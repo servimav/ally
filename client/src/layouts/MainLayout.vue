@@ -16,7 +16,7 @@ function toggleDark() {
 
 onBeforeMount(() => {
     if (useTheme().is() === 'dark')
-        useTheme().setDark()
+        useTheme().setDark();
 })
 </script>
 
