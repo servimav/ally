@@ -19,5 +19,8 @@ export const routes: RouteRecordRaw[] = [
         path: '/auth',
         name: ROUTE_NAME.AUTH_LOGIN,
         component: AuthLayout,
-    }
+    }, {
+        path: '/:catchAll(.*)*',
+        component: () => import('@/pages/ErrorNotFound.vue'),
+    },
 ];

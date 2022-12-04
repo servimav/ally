@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Facades\Voyager;
 
@@ -15,10 +16,18 @@ use TCG\Voyager\Facades\Voyager;
 */
 
 Route::get('/', function () {
-    return redirect(env('APP_URL') . '/ui');;
+    return File::get(public_path('ui') . '/index.html');
 });
+
+Route::get('/auth', function () {
+    return File::get(public_path('ui') . '/index.html');
+})->name('login');
 
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+});
+
+Route::fallback(function () {
+    return File::get(public_path('ui') . '/index.html');
 });

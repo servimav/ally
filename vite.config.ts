@@ -15,6 +15,8 @@ export default defineConfig({
     },
     root: 'client',
     build: {
-        outDir: './public/ui/'
+        outDir: '../public/ui/',
+        emptyOutDir: true,
     },
+    base: '/ui/'
 })
