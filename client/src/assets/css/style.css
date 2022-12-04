@@ -6,4 +6,8 @@
     .form-input {
         @apply border-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base placeholder-[#ACB6BE] outline-none focus:border-primary-low focus-visible:shadow-none;
     }
+
+    .btn-primary {
+        @apply border-primary w-full cursor-pointer rounded-md border bg-primary py-3 px-5 text-base text-white transition hover:bg-opacity-90
+    }
 }

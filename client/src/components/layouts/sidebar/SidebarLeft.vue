@@ -1,5 +1,6 @@
 <script setup lang='ts'>
-import OverlayVue from '@/components/containers/Overlay.vue'
+import OverlayVue from '@/components/containers/Overlay.vue';
+import { mdiHeart } from '@mdi/js'
 defineProps<{ modelValue: boolean }>()
 defineEmits<{ (e: 'update:model-value', v: boolean): void }>();
 </script>
@@ -9,6 +10,11 @@ defineEmits<{ (e: 'update:model-value', v: boolean): void }>();
         <nav :class="{ 'show': modelValue }"
             class="pt-[6rem] lg:translate-x-0 sidebar h-screen fixed left-0 top-0 flex w-64 -translate-x-full flex-col overflow-y-auto bg-primary-low dark:bg-primary pb-8 sm:max-w-sm">
             <slot></slot>
+            <div class="mt-auto text-gray-100 text-center text-sm font-light">
+                Creado con <span>
+                    <BaseIcon :path="mdiHeart" class="inline-block" />
+                </span> por <a href="https://github.com/AdriCQ" target="_blank">AdriCQ</a>
+            </div>
         </nav>
     </div>
     <!-- <div class="h-screen bg-transparent sm:hidden" v-if="modelValue" @click="$emit('update:model-value', false)"></div> -->

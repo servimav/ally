@@ -7,4 +7,5 @@ export interface IIconLabelLink {
 }
 
 
+export * from './qrcode'
 export * from './user'

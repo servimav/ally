@@ -1,10 +1,12 @@
 <script setup lang='ts'>
 import { useUserStore } from '@/store';
 import { useNotification } from '@/helpers'
-import { IUserRequestLogin } from '@/types';
+import { IUserRequestLogin, IUserResponseAuth } from '@/types';
 import { ref } from 'vue';
+import InputText from '../inputs/InputText.vue';
 
 const User = useUserStore();
+const $emit = defineEmits<{ (e: 'auth', val: IUserResponseAuth): void }>()
 
 const form = ref<IUserRequestLogin>({
     email: '',
@@ -19,6 +21,7 @@ const form = ref<IUserRequestLogin>({
 async function onSubmit() {
     try {
         const resp = await User.login(form.value);
+        $emit('auth', resp);
     } catch (error) {
         useNotification().axiosError(error);
     }
@@ -27,24 +30,13 @@ async function onSubmit() {
 
 <template>
     <form>
-        <div class="mb-6">
-            <div class="text-gray-200 py-2 text-justify w-full">
-                <label for="#login-email">Email</label>
-            </div>
-            <input id="login-email" type="email" placeholder="Email" v-model="form.email"
-                class="border-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
+        <div class="space-y-2">
+            <InputText id-key="login-email" v-model="form.email" label="Email" type="email" required />
+            <InputText id-key="login-password" v-model="form.password" label="Contraseña" type="password" required />
         </div>
-        <div class="mb-6">
-            <div class="text-gray-200 py-2 text-justify w-full">
-                <label for="#login-password">Password</label>
-            </div>
-            <input id="login-password" type="password" placeholder="Password" v-model="form.password"
-                class="border-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none" />
-        </div>
-        <div class="mb-10">
-            <button type="submit" @click.prevent="onSubmit"
-                class="bordder-primary w-full cursor-pointer rounded-md border bg-primary py-3 px-5 text-base text-white transition hover:bg-opacity-90">
-                Sign In</button>
+        <div class="my-10">
+            <button type="submit" @click.prevent="onSubmit" class="btn-primary">
+                Login</button>
         </div>
     </form>
 

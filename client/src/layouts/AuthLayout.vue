@@ -2,9 +2,17 @@
 import AuthLogin from '@/components/forms/auth/AuthLogin.vue';
 import AuthRegister from '@/components/forms/auth/AuthRegister.vue';
 import SocialAuth from '@/components/forms/auth/SocialAuth.vue';
+import { ROUTE_NAME } from '@/router';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const $router = useRouter();
 
 const login = ref(true);
+
+function onAuth() {
+    void $router.push({ name: ROUTE_NAME.MAIN })
+}
 </script>
 
 <template>
@@ -20,20 +28,19 @@ const login = ref(true);
                             </a>
                         </div>
 
-                        <AuthLogin v-if="login" />
-                        <AuthRegister v-else />
+                        <AuthLogin v-if="login" @auth="onAuth" />
+                        <AuthRegister v-else @auth="onAuth" />
 
 
-                        <SocialAuth />
+                        <!-- <SocialAuth /> -->
 
                         <a href="javascript:void(0)"
                             class="mb-2 inline-block text-base text-[#adadad] hover:text-primary hover:underline">
-                            Forget Password?
+                            ¿Olvidaste la Contraseña?
                         </a>
                         <p class="text-base text-[#adadad]">
-                            Not a member yet?
                             <a href="javascript:void(0)" @click="login = !login" class="text-white hover:underline">
-                                Sign Up
+                                {{ login ? 'Crear Cuenta' : 'Ya tengo cuenta' }}
                             </a>
                         </p>
                     </div>

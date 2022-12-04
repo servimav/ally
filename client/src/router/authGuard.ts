@@ -7,5 +7,6 @@ export const AuthGuard: NavigationGuard = (to, from, next) => {
     User.load();
 
     if (User.api_token) next();
-    next({ name: ROUTE_NAME.AUTH_LOGIN });
+    else
+        next({ name: ROUTE_NAME.AUTH });
 }

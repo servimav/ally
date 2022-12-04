@@ -1,12 +1,30 @@
 <script setup lang='ts'>
 import { mdiMenu, mdiClose, mdiAccount, mdiGithub } from '@mdi/js';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router'
+import { useUserStore } from '@/store';
+import { ROUTE_NAME } from '@/router';
 import ProfileMenu from '@/components/popups/ProfileMenu.vue';
 
 defineProps<{ sidebarMenu: boolean }>()
 const $emit = defineEmits<{ (e: 'update:sidebarMenu', val: boolean): void }>()
+const $router = useRouter();
+const User = useUserStore();
+/**
+ * -----------------------------------------
+ *	Data
+ * -----------------------------------------
+ */
 
 const profileMenu = ref(false);
+
+function profileClick() {
+    if (User.api_token) {
+        profileMenu.value = !profileMenu.value;
+    } else {
+        void $router.push({ name: ROUTE_NAME.AUTH })
+    }
+}
 </script>
 
 <template>
@@ -86,8 +104,7 @@ const profileMenu = ref(false);
                         <div>
                             <button type="button"
                                 class="inline-flex items-center justify-center rounded-md p-2 text-gray-400"
-                                :aria-expanded="profileMenu" aria-haspopup="menu"
-                                @click.prevent="(profileMenu = !profileMenu)">
+                                :aria-expanded="profileMenu" aria-haspopup="menu" @click.prevent="profileClick">
                                 <span class="sr-only">Open profile menu</span>
                                 <svg class="block h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">

@@ -10,7 +10,7 @@ export interface IUserProfile {
  */
 export interface IUserResponseAuth {
     profile: IUserProfile;
-    api_token: string;
+    token: string;
 }
 /**
  * IUserRequestLogin
