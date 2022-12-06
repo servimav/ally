@@ -28,7 +28,8 @@ function download() {
     <div class="relative">
         <figure class="inline-block text-[0px]">
             <vue-qrcode :value="data" :scale="scale" :quality="1" :color="{ dark: '#000000ff', light: '#ffffffff' }"
-                type="image/png" @change="onChange" @click="(showDownload = !showDownload)" />
+                :class="{ 'cursor-pointer': downloadable }" type="image/png" @change="onChange"
+                @click="(showDownload = !showDownload)" />
             <img v-if="withImage"
                 class="bg-transparent left-1/2 h-1/6 overflow-hidden absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-1/6"
                 src="/vite.svg" alt="Logo QR" />s

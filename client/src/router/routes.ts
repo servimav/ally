@@ -16,6 +16,10 @@ export const routes: RouteRecordRaw[] = [
                 path: '',
                 name: ROUTE_NAME.GUEST_HOME,
                 component: () => import('@/pages/MainPage.vue')
+            }, {
+                path: '/generate/:type',
+                name: ROUTE_NAME.QR_GENERATE,
+                component: () => import('@/pages/GenerateQr.vue')
             }
         ],
     }, {

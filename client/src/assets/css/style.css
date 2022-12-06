@@ -8,6 +8,9 @@
     }
 
     .btn-primary {
-        @apply border-primary w-full cursor-pointer rounded-md border bg-primary py-3 px-5 text-base text-white transition hover:bg-opacity-90
+        @apply border-primary w-full cursor-pointer rounded-md border bg-primary py-3 px-5 text-base text-white transition hover:bg-opacity-90;
+    }
+    .btn-primary-low {
+        @apply border-primary-low w-full cursor-pointer rounded-md border bg-primary-low py-3 px-5 text-base text-white transition hover:bg-opacity-90;
     }
 }
