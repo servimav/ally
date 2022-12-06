@@ -1,9 +1,10 @@
-import { $api } from '@/helpers';
+import { useService } from '@/services';
 import { IUserProfile, IUserRequestLogin, IUserRequestRegister, IUserResponseAuth } from '@/types';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 const STORE_KEY = 'useUserStore';
+const services = useService();
 /**
  * UserStore
  */
@@ -23,7 +24,7 @@ export const useUserStore = defineStore(STORE_KEY, () => {
      * @returns
      */
     async function login(p: IUserRequestLogin) {
-        const resp = await $api.post<IUserResponseAuth>('api/auth/login', p);
+        const resp = await services.auth.login(p);
         profile.value = resp.data.profile;
         api_token.value = resp.data.token;
         save();
@@ -34,7 +35,7 @@ export const useUserStore = defineStore(STORE_KEY, () => {
      * @returns
      */
     async function getProfile() {
-        const resp = await $api.get<IUserProfile>('api/auth/');
+        const resp = await services.auth.profile();
         profile.value = resp.data;
         save();
         return resp.data;
@@ -45,7 +46,7 @@ export const useUserStore = defineStore(STORE_KEY, () => {
      * @returns
      */
     async function register(p: IUserRequestRegister) {
-        const resp = await $api.post<IUserResponseAuth>('api/auth/register', p);
+        const resp = await services.auth.register(p);
         profile.value = resp.data.profile;
         api_token.value = resp.data.token;
         save();
