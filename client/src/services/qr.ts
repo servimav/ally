@@ -37,7 +37,7 @@ export function useQrService(api: AxiosInstance) {
          * @param slug
          * @returns
          */
-        public: async (userName: string, slug: string) => api.get<IQrCode>(`${baseUrl}${userName}/${slug}`),
+        public: async (name: string, slug: string) => api.get<IQrCode>('api/public-qr', { params: { name, slug } }),
         /**
          * update
          * @param id

@@ -115,11 +115,20 @@ class QrController extends Controller
      * @param Request request
      * @return Illuminate\Http\JsonResponse
      */
-    public function publicQr(string $name, string $slug)
+    public function publicQr(Request $request)
     {
-        $user = User::query()->where('name', str_replace('-', ' ', $name))->first();
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string'],
+            'slug' => ['required', 'string'],
+        ]);
+        if ($validator->fails()) {
+            return $this->sendErrorReponse($validator->errors());
+        }
+        $validator = $validator->validate();
+
+        $user = User::query()->where('name', str_replace('-', ' ', $validator['name']))->first();
         if (!$user) return $this->sendErrorReponse('No existe el usuario');
-        $model = $user->qrs()->where([['slug', '=', $slug], ['public', '=', true]])->first();
+        $model = $user->qrs()->where([['slug', '=', $validator['slug']], ['public', '=', true]])->first();
         return $model
             ? new QrResource($model)
             : $this->sendErrorReponse('No existe el codigo');

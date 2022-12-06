@@ -18,8 +18,12 @@ export const useNotify = createGlobalState(
          * axiosError
          * @param message
          */
-        function axiosError(message: AxiosError | unknown) {
-            console.log({ message })
+        function axiosError(err: AxiosError | unknown) {
+            const typedError = err as AxiosError;
+            const message = typedError.response?.data;
+            const stringMsg = String(message);
+            error(stringMsg);
+            return stringMsg;
         }
         /**
          * error

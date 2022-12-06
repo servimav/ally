@@ -15,7 +15,7 @@ Route::prefix('auth')->group(function () {
     Route::post('register', [AuthController::class, 'register']);
 });
 
-Route::get('public-qr/{name}/{slug}', [QrController::class, 'publicQr']);
+Route::get('public-qr', [QrController::class, 'publicQr']);
 
 Route::apiResources([
     'qr' => QrController::class,

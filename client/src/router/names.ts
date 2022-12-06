@@ -5,4 +5,6 @@ export enum ROUTE_NAME {
     GUEST_HOME = 'GUEST.HOME',
     // Main
     MAIN = 'MAIN',
+    // Public
+    PUBLIC_QR = 'PUBLIC.QR'
 }

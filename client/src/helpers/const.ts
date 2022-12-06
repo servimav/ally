@@ -38,6 +38,6 @@ export const BASIC_TYPES: IIconLabelLink[] = [
         label: 'Ofertas'
     }, {
         icon: mdiBitcoin,
-        label: 'Crypto Wallet'
+        label: 'Wallet'
     }
 ]
