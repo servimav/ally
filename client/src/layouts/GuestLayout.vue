@@ -1,12 +1,13 @@
 <script setup lang='ts'>
 import { ref } from 'vue';
-import { mdiAccount, mdiGithub, mdiApplication, mdiShare, mdiWeatherNight } from '@mdi/js';
+import { mdiAccount, mdiGithub, mdiShare } from '@mdi/js';
 import { share } from '@/helpers'
 import NavBar from '@/components/layouts/NavBar.vue';
 import SidebarLeft from '@/components/layouts/sidebar/SidebarLeft.vue';
 import SidebarGroup from '@/components/layouts/sidebar/SidebarGroup.vue';
 import SidebarLink from '@/components/layouts/sidebar/SidebarLink.vue';
 import { ROUTE_NAME } from '@/router';
+
 
 const sidebar = ref(false);
 

@@ -1,6 +1,5 @@
 <script setup lang='ts'>
 import QrTypeIcons from '@/components/containers/QrTypeIcons.vue';
-import QrCode from '@/components/widgets/QrCode.vue'
 import { BASIC_TYPES } from '@/helpers/const';
 import { IQrCode } from '@/types';
 
