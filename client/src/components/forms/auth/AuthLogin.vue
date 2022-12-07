@@ -9,8 +9,8 @@ const User = useUserStore();
 const $emit = defineEmits<{ (e: 'auth', val: IUserResponseAuth): void }>()
 
 const form = ref<IUserRequestLogin>({
-	email: '',
-	password: ''
+    email: '',
+    password: ''
 })
 /**
  * -----------------------------------------
@@ -19,25 +19,27 @@ const form = ref<IUserRequestLogin>({
  */
 
 async function onSubmit() {
-	try {
-		const resp = await User.login(form.value);
-		$emit('auth', resp);
-	} catch (error) {
-		useNotify().axiosError(error);
-	}
+    try {
+        const resp = await User.login(form.value);
+        $emit('auth', resp);
+    } catch (error) {
+        useNotify().axiosError(error);
+    }
 }
 </script>
 
 <template>
-	<form>
-		<div class="space-y-2">
-			<InputText id-key="login-email" v-model="form.email" label="Email" type="email" required />
-			<InputText id-key="login-password" v-model="form.password" label="Contraseña" type="password" required />
-		</div>
-		<div class="my-10">
-			<button type="submit" @click.prevent="onSubmit" class="btn-primary">
-				Login</button>
-		</div>
-	</form>
+    <form>
+        <div class="space-y-2">
+            <InputText id-key="login-email" v-model="form.email" label="Email" label-class="text-gray-200" type="email"
+                required />
+            <InputText id-key="login-password" v-model="form.password" label="Contraseña" label-class="text-gray-200"
+                type="password" required />
+        </div>
+        <div class="my-10">
+            <button type="submit" @click.prevent="onSubmit" class="btn-primary">
+                Login</button>
+        </div>
+    </form>
 
 </template>

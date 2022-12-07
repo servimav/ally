@@ -1,7 +1,7 @@
 import { useService } from '@/services';
 import { IUserProfile, IUserRequestLogin, IUserRequestRegister, IUserResponseAuth } from '@/types';
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const STORE_KEY = 'useUserStore';
 const services = useService();
@@ -12,6 +12,8 @@ export const useUserStore = defineStore(STORE_KEY, () => {
 
     const profile = ref<IUserProfile | undefined>();
     const api_token = ref<string | undefined>();
+
+    const isAuth = computed(() => Boolean(api_token.value));
 
     /**
      * -----------------------------------------
@@ -88,7 +90,7 @@ export const useUserStore = defineStore(STORE_KEY, () => {
 
 
     return {
-        api_token, profile,
+        api_token, profile, isAuth,
         // Methods
         load, save,
         // Actions
