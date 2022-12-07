@@ -1,4 +1,4 @@
-export type IQrType = 'TEXT' | 'URL' | 'VCARD' | 'WIFI' | 'TEL' | 'WHATSAPP' | 'TELEGRAM' | 'WALLET';
+export type IQrType = 'TEXT' | 'URL' | 'VCARD' | 'WIFI' | 'TEL' | 'WHATSAPP' | 'TELEGRAM' | 'WALLET' | 'SMS';
 
 export interface IQrCode {
     id: number;

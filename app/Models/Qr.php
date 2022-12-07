@@ -14,7 +14,7 @@ class Qr extends Model
     /**
      * Available Types
      */
-    public static $TYPES = ['TEXT', 'URL', 'VCARD', 'WIFI', 'TEL', 'WHATSAPP', 'TELEGRAM', 'WALLET'];
+    public static $TYPES = ['TEXT', 'URL', 'VCARD', 'WIFI', 'TEL', 'WHATSAPP', 'TELEGRAM', 'WALLET', 'SMS'];
     /**
      * -----------------------------------------
      *	Relations

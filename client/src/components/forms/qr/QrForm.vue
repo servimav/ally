@@ -25,7 +25,7 @@ function onSubmit() {
 
 <template>
     <Card class="p-4">
-        <form class="space-y-2 text-primary-low" @submit.prevent="onSubmit">
+        <form class="space-y-2 text-primary-low dark:text-slate-200" @submit.prevent="onSubmit">
             <InputText v-if="save" v-model="form.title" id-key="input-qr-title" label="Titulo" placeholder="Mi Titulo"
                 required />
             <!-- Data types-->
@@ -45,7 +45,8 @@ function onSubmit() {
             <InputText v-if="save" v-model="form.slug" id-key="input-qr-slug" label="Slug" required />
 
             <div class="mt-4">
-                <button class="btn-primary" type="submit">{{ save ? 'Guardar' : 'Generar QR' }}</button>
+                <button class="btn-primary dark:bg-primary-low" type="submit">{{ save ? 'Guardar' : 'Generar QR'
+                }}</button>
             </div>
         </form>
     </Card>

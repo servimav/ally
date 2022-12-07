@@ -1,42 +1,46 @@
 import { ROUTE_NAME } from '@/router';
-import { IIconLabelLink } from '@/types';
+import { IIconLabelLink, IQrType } from '@/types';
 import { mdiContacts, mdiCreditCard, mdiLink, mdiPencil, mdiSend, mdiWhatsapp, mdiWifi, mdiFood, mdiMessage, mdiPhone, mdiBitcoin, mdiListBoxOutline } from '@mdi/js';
 
-export const BASIC_TYPES: IIconLabelLink[] = [
+export interface IIconWidget extends IIconLabelLink {
+    type?: IQrType;
+}
+
+export const BASIC_TYPES: IIconWidget[] = [
     {
         icon: mdiPencil,
         label: 'Texto',
-        link: { name: ROUTE_NAME.QR_GENERATE, params: { type: 'TEXT' } }
+        type: 'TEXT'
     },
     {
         icon: mdiLink,
         label: 'URL',
-        link: { name: ROUTE_NAME.QR_GENERATE, params: { type: 'URL' } }
+        type: 'URL'
     },
     {
         icon: mdiWifi,
         label: 'WiFi',
-        link: { name: ROUTE_NAME.QR_GENERATE, params: { type: 'WIFI' } }
+        type: 'WIFI'
     }, {
         icon: mdiContacts,
         label: 'Contacto',
-        link: { name: ROUTE_NAME.QR_GENERATE, params: { type: 'VCARD' } }
+        type: 'VCARD'
     }, {
         icon: mdiPhone,
         label: 'Teléfono',
-        link: { name: ROUTE_NAME.QR_GENERATE, params: { type: 'TEL' } }
+        type: 'TEL'
     }, {
         icon: mdiMessage,
         label: 'Mensaje',
-        link: { name: ROUTE_NAME.QR_GENERATE, params: { type: 'SMS' } }
+        type: 'SMS'
     }, {
         icon: mdiWhatsapp,
         label: 'Whatsapp',
-        link: { name: ROUTE_NAME.QR_GENERATE, params: { type: 'WHATSAPP' } }
+        type: 'WHATSAPP'
     }, {
         icon: mdiSend,
         label: 'Telegram',
-        link: { name: ROUTE_NAME.QR_GENERATE, params: { type: 'TELEGRAM' } }
+        type: 'TELEGRAM'
     }, {
         icon: mdiCreditCard,
         label: 'Transfermovil'

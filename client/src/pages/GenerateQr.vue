@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router';
 import QrForm from '@/components/forms/qr/QrForm.vue';
 import QrFormWifi from '@/components/forms/qr/QrFormWifi.vue';
 import QrCode from '@/components/widgets/QrCode.vue';
-import { computed, onBeforeMount, ref } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import { IQrCodeCreate, IQrCodeUpdate, IQrType } from '@/types';
 import { useUserStore } from '@/store';
 import { useService } from '@/services'
@@ -16,7 +16,7 @@ import { useNotify } from '@/helpers';
 
 const $route = useRoute();
 const $service = useService();
-const { api_token } = useUserStore();
+const { isAuth } = useUserStore();
 const Notify = useNotify();
 /**
  * -----------------------------------------
@@ -26,7 +26,6 @@ const Notify = useNotify();
 
 const type = ref<IQrType>('TEXT');
 const qr = ref<string>()
-const isAuth = computed(() => Boolean(api_token));
 const showForm = ref(true);
 
 /**
@@ -35,7 +34,7 @@ const showForm = ref(true);
  * @param v
  */
 async function onComplete(t: 'create' | 'update', v: IQrCodeCreate | IQrCodeUpdate, updateId?: number) {
-    if (isAuth.value && qr.value) {
+    if (isAuth && v) {
         try {
             if (t === 'create')
                 await $service.qr.create(v as IQrCodeCreate);
