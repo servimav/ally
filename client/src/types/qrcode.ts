@@ -25,3 +25,13 @@ export interface IQrCodeCreate {
  * IQrCodeUpdate
  */
 export type IQrCodeUpdate = Partial<Omit<IQrCode, 'id'>>
+
+/**
+ * IQrWifiData
+ */
+export interface IQrWifiData {
+    ssid: string;
+    password: string;
+    type: 'WEP' | 'WPA' | 'blank';
+    hidden: boolean
+}

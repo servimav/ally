@@ -1,17 +1,53 @@
 <script setup lang='ts'>
 import { useRoute } from 'vue-router';
 import QrForm from '@/components/forms/qr/QrForm.vue';
+import QrFormWifi from '@/components/forms/qr/QrFormWifi.vue';
 import QrCode from '@/components/widgets/QrCode.vue';
-import { onBeforeMount, ref } from 'vue';
+import { computed, onBeforeMount, ref } from 'vue';
 import { IQrCodeCreate, IQrCodeUpdate, IQrType } from '@/types';
+import { useUserStore } from '@/store';
+import { useService } from '@/services'
+import { useNotify } from '@/helpers';
+/**
+ * -----------------------------------------
+ *	Init
+ * -----------------------------------------
+ */
 
 const $route = useRoute();
+const $service = useService();
+const { api_token } = useUserStore();
+const Notify = useNotify();
+/**
+ * -----------------------------------------
+ *	Data
+ * -----------------------------------------
+ */
 
 const type = ref<IQrType>('TEXT');
 const qr = ref<string>()
+const isAuth = computed(() => Boolean(api_token));
+const showForm = ref(true);
 
-function onComplete(t: 'create' | 'update', v: IQrCodeCreate | IQrCodeUpdate) {
-    qr.value = v.data
+/**
+ * onComplete
+ * @param t
+ * @param v
+ */
+async function onComplete(t: 'create' | 'update', v: IQrCodeCreate | IQrCodeUpdate, updateId?: number) {
+    if (isAuth.value && qr.value) {
+        try {
+            if (t === 'create')
+                await $service.qr.create(v as IQrCodeCreate);
+            else if (t === 'update' && updateId)
+                await $service.qr.update(updateId, v as IQrCodeUpdate);
+            Notify.success('Se ha guardado correctamente');
+        } catch (error) {
+            Notify.axiosError(error);
+        }
+    }
+    qr.value = v.data;
+    showForm.value = false;
 }
 
 onBeforeMount(() => {
@@ -21,8 +57,10 @@ onBeforeMount(() => {
 
 <template>
     <div class="p-2">
-        <QrForm :type="type" @complete="onComplete" />
-
+        <template v-if="showForm">
+            <QrFormWifi v-if="type === 'WIFI'" @complete="onComplete" :save="isAuth" />
+            <QrForm v-else :type="type" @complete="onComplete" :save="isAuth" />
+        </template>
         <div class="text-center mt-4 p-2">
             <QrCode :data="qr" v-if="qr" :scale="10" downloadable />
         </div>

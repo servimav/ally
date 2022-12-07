@@ -1,14 +1,22 @@
 <script setup lang='ts'>
-import { IQrCodeCreate, IQrCodeUpdate, IQrType } from '@/types';
+import { IQrCodeCreate, IQrCodeUpdate, IQrType, IQrWifiData } from '@/types';
+import { ref } from 'vue';
 import InputTextarea from '../inputs/InputTextarea.vue';
 import { useQrForm } from './qrForm';
+
 
 const $props = withDefaults(defineProps<{ type?: IQrType, save?: boolean }>(), {
     type: 'TEXT',
 });
 
 const $emit = defineEmits<{ (e: 'complete', type: 'create' | 'update', v: IQrCodeCreate | IQrCodeUpdate, updateId?: number): void }>()
-const { form } = useQrForm($props, $emit)
+const { form } = useQrForm($props, $emit);
+const wifi = ref<IQrWifiData>({
+    hidden: false,
+    password: '',
+    ssid: '',
+    type: 'blank'
+})
 
 /**
  * -----------------------------------------
@@ -16,10 +24,8 @@ const { form } = useQrForm($props, $emit)
  * -----------------------------------------
  */
 function onSubmit() {
-    let d = form.value.data;
-    if (form.value.type === 'TEL')
-        d = `tel:${form.value.data}`
-    $emit('complete', 'create', { ...form.value, data: d });
+    form.value.data = `WIFI:S:${wifi.value.ssid};T:${wifi.value.type};P:${wifi.value.password};H:${wifi.value.hidden ? 'true' : 'false'};;`;
+    $emit('complete', 'create', form.value);
 }
 </script>
 
@@ -28,19 +34,10 @@ function onSubmit() {
         <form class="space-y-2 text-primary-low" @submit.prevent="onSubmit">
             <InputText v-if="save" v-model="form.title" id-key="input-qr-title" label="Titulo" placeholder="Mi Titulo"
                 required />
-            <!-- Data types-->
-            <InputTextarea v-if="type === 'TEXT'" v-model="form.data" id-key="input-qr-data-text" label="Texto"
-                placeholder="Su texto aqui" required :rows="2" />
 
-            <InputText v-if="type === 'URL'" placeholder="https://www.example.com" v-model="form.data"
-                id-key="input-qr-data-url" label="URL" required />
-
-            <InputText type="tel" v-if="type === 'TEL'" placeholder="55555555" v-model="form.data"
-                id-key="input-qr-data-tel" label="Telefono" required />
-
-            <InputText type="text" v-if="type === 'WALLET'" v-model="form.data" id-key="input-qr-data-wallet"
-                label="Wallet" required />
-            <!-- / Data types-->
+            <InputText v-model="wifi.ssid" id-key="input-qr-wifi-ssid" label="SSID" required />
+            <InputText v-model="wifi.type" id-key="input-qr-wifi-type" label="Security" required />
+            <InputText v-model="wifi.password" id-key="input-qr-wifi-password" label="Password" required />
 
             <InputText v-if="save" v-model="form.slug" id-key="input-qr-slug" label="Slug" required />
 
