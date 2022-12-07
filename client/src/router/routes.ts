@@ -31,7 +31,22 @@ export const routes: RouteRecordRaw[] = [
                 path: '',
                 name: ROUTE_NAME.MAIN,
                 component: () => import('@/pages/MainPage.vue')
-            }
+            },
+            {
+                path: 'my-qr',
+                name: ROUTE_NAME.MAIN_MYQR,
+                component: () => import('@/pages/MyQrPage.vue')
+            },
+            {
+                path: 'generate/:type',
+                name: ROUTE_NAME.MAIN_GENERATE,
+                component: () => import('@/pages/GenerateQr.vue')
+            },
+            {
+                path: 'profile',
+                name: ROUTE_NAME.MAIN_PROFILE,
+                component: () => import('@/pages/MyProfile.vue')
+            },
         ],
     }, {
         path: '/auth',
