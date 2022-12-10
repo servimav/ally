@@ -28,15 +28,18 @@ onBeforeRouteUpdate(() => { sidebar.value = false })
         <NavBar class="z-30" v-model:sidebar-menu="sidebar" />
         <!-- Navbar end -->
         <SidebarLeft v-model="sidebar">
-            <SidebarGroup label="Ajustes">
-                <SidebarLink label="Inicio" :icon="mdiHome" :to="{ name: ROUTE_NAME.MAIN }" />
-                <SidebarLink label="QR" :icon="mdiApplication" :to="{ name: ROUTE_NAME.MAIN_MYQR }" />
+            <SidebarGroup label="Colecciones">
+                <SidebarLink label="QR" :icon="mdiApplication" :to="{ name: ROUTE_NAME.MAIN }" />
                 <SidebarLink label="Pagos" :icon="mdiCreditCard" :to="{ name: ROUTE_NAME.MAIN_PAYMENT }" />
                 <SidebarLink label="Referidos" :icon="mdiAccountMultiple" :to="{ name: ROUTE_NAME.MAIN_REFERAL }" />
-                <SidebarLink label="GitHub" :icon="mdiGithub" />
+            </SidebarGroup>
+            <SidebarGroup label="Ajustes">
                 <SidebarLink label="Modo Oscuro" :icon="mdiWeatherNight" @click="toggleDark" />
                 <SidebarLink label="Cuenta" :icon="mdiAccount" :to="{ name: ROUTE_NAME.MAIN_PROFILE }" />
+            </SidebarGroup>
+            <SidebarGroup label="Comparte">
                 <SidebarLink label="Compartir" :icon="mdiShare" @click="share" />
+                <SidebarLink label="GitHub" :icon="mdiGithub" />
             </SidebarGroup>
             <!-- <SidebarGroup label="Crear Qr">
                 <SidebarLink :label="t.label" v-for="(t, key) in BASIC_TYPES" :key="`sidebar-type-${key}`"

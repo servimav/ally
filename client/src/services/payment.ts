@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import { IUserPayment } from '@/types'
+import type { IPaymentMethod, IUserPayment } from '@/types'
 
 export function useUserPayment(api: AxiosInstance) {
     /**
@@ -23,7 +23,7 @@ export function useUserPayment(api: AxiosInstance) {
          * available
          * @returns
          */
-        available: () => api.get<IUserPayment[]>(`${baseUrl}/available`),
+        available: () => api.get<IPaymentMethod[]>(`${baseUrl}/available`),
     }
 
 }

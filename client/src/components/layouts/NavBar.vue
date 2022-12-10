@@ -72,18 +72,17 @@ function profileClick() {
                     <div class="hidden sm:ml-8 sm:block">
                         <div class="flex space-x-4">
                             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                            <a href="#"
+                            <RouterLink :to="{ name: ROUTE_NAME.MAIN_MYQR }"
                                 class="bg-primary hover:bg-primary-low text-white px-3 py-2 rounded-md text-sm font-medium"
-                                aria-current="page">Dashboard</a>
+                                aria-current="page">QR</RouterLink>
 
-                            <a href="#"
-                                class="text-gray-300 hover:bg-primary-low hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
+                            <RouterLink :to="{ name: ROUTE_NAME.MAIN_PAYMENT }"
+                                class="text-gray-300 hover:bg-primary-low hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                Pagos</RouterLink>
 
-                            <a href="#"
-                                class="text-gray-300 hover:bg-primary-low hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
-
-                            <a href="#"
-                                class="text-gray-300 hover:bg-primary-low hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
+                            <RouterLink :to="{ name: ROUTE_NAME.MAIN_REFERAL }"
+                                class="text-gray-300 hover:bg-primary-low hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                                Referidos</RouterLink>
                         </div>
                     </div>
                 </div>

@@ -47,6 +47,16 @@ export const routes: RouteRecordRaw[] = [
                 name: ROUTE_NAME.MAIN_PROFILE,
                 component: () => import('@/pages/MyProfile.vue')
             },
+            {
+                path: 'payment',
+                name: ROUTE_NAME.MAIN_PAYMENT,
+                component: () => import('@/pages/PaymentMethods.vue')
+            },
+            {
+                path: 'referals',
+                name: ROUTE_NAME.MAIN_REFERAL,
+                component: () => import('@/pages/ReferalsPage.vue')
+            },
         ],
     }, {
         path: '/auth',

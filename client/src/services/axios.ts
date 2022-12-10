@@ -1,5 +1,7 @@
 import axios, { AxiosRequestHeaders } from 'axios';
 import { useUserStore } from '@/store'
+import { useRoute, useRouter } from 'vue-router';
+import { ROUTE_NAME } from '@/router';
 
 let baseURL = 'http://localhost:8000';
 if (window.location.hostname !== 'localhost')
@@ -32,6 +34,5 @@ $api.interceptors.request.use(req => {
     }
 
     return req;
-})
-
+});
 export { baseURL, $api }

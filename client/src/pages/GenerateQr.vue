@@ -34,17 +34,17 @@ const showForm = ref(true);
  * @param v
  */
 async function onComplete(t: 'create' | 'update', v: IQrCodeCreate | IQrCodeUpdate, updateId?: number) {
-    if (isAuth && v) {
-        try {
-            if (t === 'create')
-                await $service.qr.create(v as IQrCodeCreate);
-            else if (t === 'update' && updateId)
-                await $service.qr.update(updateId, v as IQrCodeUpdate);
-            Notify.success('Se ha guardado correctamente');
-        } catch (error) {
-            Notify.axiosError(error);
-        }
-    }
+    // if (isAuth && v) {
+    //     try {
+    //         if (t === 'create')
+    //             await $service.qr.create(v as IQrCodeCreate);
+    //         else if (t === 'update' && updateId)
+    //             await $service.qr.update(updateId, v as IQrCodeUpdate);
+    //         Notify.success('Se ha guardado correctamente');
+    //     } catch (error) {
+    //         Notify.axiosError(error);
+    //     }
+    // }
     qr.value = v.data;
     showForm.value = false;
 }
@@ -57,8 +57,8 @@ onBeforeMount(() => {
 <template>
     <div class="p-2">
         <template v-if="showForm">
-            <QrFormWifi v-if="type === 'WIFI'" @complete="onComplete" :save="isAuth" />
-            <QrForm v-else :type="type" @complete="onComplete" :save="isAuth" />
+            <QrFormWifi v-if="type === 'WIFI'" @complete="onComplete" />
+            <QrForm v-else :type="type" @complete="onComplete" />
         </template>
         <div class="text-center mt-4 p-2">
             <QrCode :data="qr" v-if="qr" :scale="10" downloadable />
