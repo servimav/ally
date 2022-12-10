@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('user_payments', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
-            $table->json('data');
+            $table->json('methods');
         });
     }
 

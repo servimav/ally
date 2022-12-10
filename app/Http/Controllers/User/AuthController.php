@@ -38,7 +38,7 @@ class AuthController extends Controller
             $user = auth()->user();
             return $this->authResponse($user);
         }
-        return $this->sendReponse('Credenciales incorrectas', 401);
+        return $this->sendErrorReponse('Credenciales incorrectas');
     }
 
     /**

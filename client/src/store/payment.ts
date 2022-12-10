@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
-import type { IPaymentMethod, IUserPayment } from '@/types';
+import type { IPaymentMethod, IUserPayment, IUserPaymentData } from '@/types';
 import { useService } from '@/services';
 
 const { payment } = useService()
@@ -11,10 +11,10 @@ export const usePaymentStore = defineStore(STORE_KEY, () => {
 
     const allMethods = ref<IPaymentMethod[]>([]);
 
-    const myMethods = ref<IUserPayment[]>([]);
+    const myMethods = ref<IUserPayment>({ id: 0, methods: [] });
 
     const cardMethods = computed<IPaymentMethod[]>(() => {
-        return allMethods.value.filter(m => m.type === 'CARDS')
+        return allMethods.value.filter(m => m.type === 'BANK')
     });
     const cryptoMethods = computed<IPaymentMethod[]>(() => {
         return allMethods.value.filter(m => m.type === 'CRYPTO')
@@ -55,17 +55,30 @@ export const usePaymentStore = defineStore(STORE_KEY, () => {
     }
 
     async function listMine() {
-        const resp = await payment.index()
+        const resp = await payment.index();
         myMethods.value = resp.data;
         return resp.data;
     }
 
-    async function store(p: IUserPayment) {
-        const temp = myMethods.value;
-        temp.push(p);
-        const resp = await payment.store(temp);
-        myMethods.value = resp.data;
-        return resp.data
+    async function store(p: IUserPaymentData) {
+        myMethods.value.methods.push(p);
+        return (await payment.store(myMethods.value.methods)).data;
+    }
+
+    async function update(p: IUserPaymentData) {
+        const index = myMethods.value.methods.findIndex(v => v.payment_id === p.payment_id);
+        if (index >= 0) {
+            myMethods.value.methods[index] = p;
+        }
+        return (await payment.store(myMethods.value.methods)).data;
+    }
+
+    async function remove(p: IUserPaymentData) {
+        const index = myMethods.value.methods.findIndex(v => v.payment_id === p.payment_id);
+        if (index >= 0) {
+            myMethods.value.methods.splice(index, 1)
+        }
+        return (await payment.store(myMethods.value.methods)).data;
     }
 
 
@@ -74,7 +87,7 @@ export const usePaymentStore = defineStore(STORE_KEY, () => {
         // Methods
         getById,
         // Actions
-        list, listMine, store
+        list, listMine, store, update, remove
     }
 
 });

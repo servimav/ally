@@ -1,15 +1,19 @@
-export type IPaymentMethodType = 'CRYPTO' | 'WALLET' | 'CARDS';
+export type IPaymentMethodType = 'CRYPTO' | 'WALLET' | 'BANK';
 
 export interface IPaymentMethod {
     id: number;
     name: string;
     image: string;
-    active: boolean;
     fav: boolean;
     type: IPaymentMethodType;
 }
 
-export interface IUserPayment {
+export interface IUserPaymentData {
     payment_id: number;
     data: string;
+    name: string;
+}
+export interface IUserPayment {
+    id: number;
+    methods: IUserPaymentData[];
 }

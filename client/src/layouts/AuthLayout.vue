@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import AuthLogin from '@/components/forms/auth/AuthLogin.vue';
 import AuthRegister from '@/components/forms/auth/AuthRegister.vue';
-import SocialAuth from '@/components/forms/auth/SocialAuth.vue';
+// import SocialAuth from '@/components/forms/auth/SocialAuth.vue';
 import { ROUTE_NAME } from '@/router';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
@@ -19,7 +19,7 @@ function onAuth() {
     <div class="bg-primary-low sm:bg-white min-h-screen pt-10 sm:py-none">
         <div class="container mx-auto">
             <div class="flex flex-wrap">
-                <div class="w-full px-4">
+                <div class="w-full px-2">
                     <div
                         class="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-primary-low sm:py-10 px-10 text-center sm:px-12 md:px-[60px]">
                         <div class="mb-10 text-center md:mb-16">

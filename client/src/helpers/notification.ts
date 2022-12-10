@@ -2,8 +2,8 @@ import { AxiosError } from 'axios';
 import { ref } from 'vue';
 import { createGlobalState } from '@vueuse/core'
 import { useUserStore } from '@/store';
-import { useRoute, useRouter } from 'vue-router';
 import { ROUTE_NAME } from '@/router';
+import { useRouter } from 'vue-router';
 /**
  * INotification
  */
@@ -13,10 +13,7 @@ export interface INotification { type?: 'warning' | 'error' | 'success' | 'info'
  */
 export const useNotify = createGlobalState(
     () => {
-
         const $router = useRouter();
-        const $route = useRoute();
-
         /**
          * notifications
          */
@@ -27,6 +24,7 @@ export const useNotify = createGlobalState(
          */
         function axiosError(err: AxiosError | unknown) {
             const typedError = err as AxiosError;
+            console.log({ typedError })
             const message = typedError.response?.data;
             const stringMsg = String(message);
 
@@ -34,10 +32,8 @@ export const useNotify = createGlobalState(
 
             if (typedError.response?.status === 401) {
                 User.logout();
-                if ($route.name !== ROUTE_NAME.AUTH) {
-                    void $router.push({ name: ROUTE_NAME.AUTH })
-                }
                 error('No tiene privilegios');
+                void $router.push({ name: ROUTE_NAME.AUTH })
             } else
                 error(stringMsg);
             return stringMsg;

@@ -11,7 +11,7 @@ class UserPayment extends Model
 
     protected $table = 'user_payments';
     protected $guarded = ['id'];
-    protected $casts = ['data' => 'array'];
+    protected $casts = ['methods' => 'array'];
     public $timestamps = false;
     /**
      * user

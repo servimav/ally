@@ -21,7 +21,7 @@ class UserPaymentController extends Controller
     {
         return auth()->user()->payment
             ? new UserPaymentResource(auth()->user()->payment)
-            : $this->sendReponse('No tiene metodos de pago');
+            : $this->sendReponse(['id' => 0, 'methods' => []]);
     }
     /**
      * store
@@ -31,9 +31,10 @@ class UserPaymentController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'data' => ['required', 'array'],
-            'data.*.payment_id' => ['required', 'integer'],
-            'data.*.payment_data' => ['required', 'string']
+            'methods' => ['nullable', 'array'],
+            'methods.*.payment_id' => ['required', 'integer'],
+            'methods.*.name' => ['required', 'string'],
+            'methods.*.data' => ['required', 'string']
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors()->toArray(), 400, [], JSON_NUMERIC_CHECK);
@@ -41,11 +42,11 @@ class UserPaymentController extends Controller
         $validator = $validator->validate();
         $model = auth()->user()->payment;
         if ($model) {
-            $model->data = $validator['data'];
+            $model->methods = $validator['methods'];
         } else {
             $model = new UserPayment([
                 'user_id' => auth()->id(),
-                'data' => $validator['data']
+                'methods' => $validator['methods']
             ]);
         }
         return $model->save() ? new UserPaymentResource($model) : $this->sendErrorReponse();

@@ -27,11 +27,11 @@ class DatabaseSeeder extends Seeder
 
     private function seedPaymentMethods()
     {
-        $crypto = ['ADA', 'ADX', 'AE', 'ARDR', 'ARK', 'BAT', 'BCC', 'BCH', 'BCN', 'BLOCK', 'BNB', 'BNT', 'BTC', 'BTCD', 'BTG', 'BTM', 'BTS', 'CNX', 'CVC', 'DASH', 'DCR', 'DGB', 'DGD', 'DOGE', 'EDG', 'EMC2', 'EOS', 'ETC', 'ETH', 'ETHOS', 'ETP', 'FCT', 'FUN', 'GAME', 'GAS', 'GBYTE', 'GNO', 'GNT', 'GNT', 'GRS', 'GXS', 'HSR', 'ICN', 'IOT', 'KMD', 'KNC', 'LSK', 'LTC', 'MAID', 'MCO', 'MNX', 'MONA', 'MTL', 'NAV', 'NEO', 'NXS', 'NXT', 'OMG', 'PAY', 'PIVX', 'POT', 'POWER', 'PPC', 'PPT', 'PURA', 'QASH', 'QTUM', 'RDN', 'REP', 'SALT', 'SAN', 'SC', 'SKY', 'SNGLS', 'SNT', 'START', 'STEEM', 'STORJ', 'SYS', 'TRX', 'UBQ', 'USDT', 'VEN', 'VTC', 'WAVES', 'WTC', 'XEM', 'XLM', 'XMR', 'XRP', 'XUC', 'XVG', 'XZC', 'ZEC', 'ZEN', 'ZRX'];
+        $crypto = ['ADA', 'AE', 'ARDR', 'ARK', 'BAT', 'BCC', 'BCH', 'BCN', 'BLOCK', 'BNB', 'BNT', 'BTC', 'BTCD', 'BTG', 'BTM', 'BTS', 'CNX', 'CVC', 'DASH', 'DCR', 'DGB', 'DGD', 'DOGE', 'EDG', 'EMC2', 'EOS', 'ETC', 'ETH', 'ETHOS', 'ETP', 'FCT', 'FUN', 'GAME', 'GAS', 'GBYTE', 'GNO', 'GNT', 'GNT', 'GRS', 'GXS', 'HSR', 'ICN', 'IOT', 'KMD', 'KNC', 'LSK', 'LTC', 'MAID', 'MCO', 'MNX', 'MONA', 'MTL', 'NAV', 'NEO', 'NXS', 'NXT', 'OMG', 'PAY', 'PIVX', 'POT', 'POWER', 'PPC', 'PPT', 'PURA', 'QASH', 'QTUM', 'RDN', 'REP', 'SALT', 'SAN', 'SC', 'SKY', 'SNGLS', 'SNT', 'START', 'STEEM', 'STORJ', 'SYS', 'TRX', 'UBQ', 'USDT', 'VEN', 'VTC', 'WAVES', 'WTC', 'XEM', 'XLM', 'XMR', 'XRP', 'XUC', 'XVG', 'XZC', 'ZEC', 'ZEN', 'ZRX'];
 
-        $wallet = ['SQP', 'Tropipay', 'Payeer', 'Paypal', 'Zelle'];
+        $wallet = ['BOLSTATM', 'PAYEER', 'PAYPAL', 'PM', 'TROPIPAY', 'WM'];
 
-        $cards = ['MLC', 'CUP', 'VISA'];
+        $banks = ['MLC', 'CUP', 'ZELLE', 'VISA', 'MC'];
 
         $insert = [];
         foreach ($crypto as $c) {
@@ -54,13 +54,19 @@ class DatabaseSeeder extends Seeder
         Payment::query()->insert($insert);
 
         $insert = [];
-        foreach ($cards as $c) {
+        foreach ($banks as $c) {
             array_push($insert, [
                 'name' => $c,
-                'image' => '/svg/cards/' . $c . '.svg',
-                'type' => 'CARDS',
+                'image' => '/svg/banks/' . $c . '.svg',
+                'type' => 'BANK',
             ]);
         }
         Payment::query()->insert($insert);
+
+        Payment::query()->insert([
+            'name' => 'QVAPAY',
+            'image' => '/svg/wallets/QVAPAY.png',
+            'type' => 'WALLET'
+        ]);
     }
 }

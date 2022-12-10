@@ -16,8 +16,7 @@ class UserPaymentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'data' => $this->data,
-            'user' => new UserResource($this->user),
+            'methods' => $this->methods,
         ];
     }
 }

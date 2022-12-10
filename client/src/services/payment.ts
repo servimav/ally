@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import type { IPaymentMethod, IUserPayment } from '@/types'
+import type { IPaymentMethod, IUserPayment, IUserPaymentData } from '@/types'
 
 export function useUserPayment(api: AxiosInstance) {
     /**
@@ -12,13 +12,13 @@ export function useUserPayment(api: AxiosInstance) {
          * index
          * @returns
          */
-        index: () => api.get<IUserPayment[]>(baseUrl),
+        index: () => api.get<IUserPayment>(baseUrl),
         /**
          * store
          * @param p
          * @returns
          */
-        store: (p: IUserPayment[]) => api.post<IUserPayment[]>(baseUrl, p),
+        store: (methods: IUserPaymentData[]) => api.post<IUserPayment>(baseUrl, { methods }),
         /**
          * available
          * @returns
