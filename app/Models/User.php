@@ -54,4 +54,9 @@ class User extends \TCG\Voyager\Models\User
     {
         return $this->hasMany(Qr::class);
     }
+
+    public function payment()
+    {
+        return $this->hasOne(UserPayment::class);
+    }
 }
