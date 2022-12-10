@@ -10,6 +10,6 @@ class Payment extends Model
     use HasFactory;
     protected $table = 'payments';
     protected $guarded = ['id'];
-    protected $casts = ['active' => 'boolean'];
+    protected $casts = ['active' => 'boolean', 'fav' => 'boolean'];
     public $timestamps = false;
 }

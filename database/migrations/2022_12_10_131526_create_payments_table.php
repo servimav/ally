@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image');
+            $table->string('type', 64);
+            $table->boolean('fav')->default(false);
             $table->boolean('active')->default(false);
         });
     }

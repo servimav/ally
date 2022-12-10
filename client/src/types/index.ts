@@ -7,5 +7,6 @@ export interface IIconLabelLink {
 }
 
 
+export * from './payment'
 export * from './qrcode'
 export * from './user'
