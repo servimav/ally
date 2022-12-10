@@ -44,7 +44,7 @@ onBeforeMount(async () => {
 
 <template>
     <div class="p-2">
-        <button class="btn-primary-low" @click.prevent="() => { selected = undefined; form = true }"
+        <button class="btn-primary-low dark:btn-primary" @click.prevent="() => { selected = undefined; form = true }"
             v-if="!form">Añadir</button>
         <UserPaymentForm :update="selected" v-if="form" @completed="onComplete" />
 

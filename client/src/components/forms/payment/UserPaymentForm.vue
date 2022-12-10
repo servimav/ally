@@ -26,7 +26,7 @@ const form = ref<IUserPaymentData>({
 
 const label = computed(() => {
     switch (selected.value?.type) {
-        case 'CARDS':
+        case 'BANK':
             return `Tarjeta`;
         case 'CRYPTO':
             return `Wallet ${selected.value.name}`;
@@ -89,7 +89,7 @@ if ($props.update) {
             <InputText id-key="input-wallet-name" label="Nombre" v-model="form.name" type="text" placeholder="Nombre"
                 required />
             <InputText id-key="input-wallet-data" :label="label" v-model="form.data" type="text" required />
-            <button class="btn-primary mt-2">Guardar</button>
+            <button class="btn-primary dark:btn-primary-low mt-2">Guardar</button>
             <button class="btn bg-error text-white mt-2" @click.prevent="onSubmit(true)">{{ update ? 'Eliminar' :
                     'Cancelar'
             }}</button>
