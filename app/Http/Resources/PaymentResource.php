@@ -17,8 +17,8 @@ class PaymentResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'image' => $this->image,
-            'active' => $this->active,
+            'image' => env('APP_URL') . $this->image,
+            // 'active' => $this->active,
             'fav' => $this->fav,
             'type' => $this->type,
         ];

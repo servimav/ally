@@ -11,7 +11,7 @@ class UserPaymentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum'])->except(['index']);
+        $this->middleware(['auth:sanctum']);
     }
     /**
      * index
@@ -21,7 +21,7 @@ class UserPaymentController extends Controller
     {
         return auth()->user()->payment
             ? new UserPaymentResource(auth()->user()->payment)
-            : $this->sendErrorReponse('No tiene metodos de pago');
+            : $this->sendReponse('No tiene metodos de pago');
     }
     /**
      * store

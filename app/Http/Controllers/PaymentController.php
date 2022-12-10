@@ -21,7 +21,7 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        return PaymentResource::collection(Payment::all());
+        return PaymentResource::collection(Payment::query()->where('active', true)->get());
     }
 
     /**
