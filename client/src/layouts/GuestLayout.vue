@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { ref, computed, onBeforeMount } from 'vue';
-import { mdiAccount, mdiHelp, mdiHome, mdiShare } from '@mdi/js';
+import { mdiAccount, mdiHelp, mdiHome, mdiShare, mdiInformation } from '@mdi/js';
 import { share } from '@/helpers'
 import NavBar from '@/components/layouts/NavBar.vue';
 import SidebarLeft from '@/components/layouts/sidebar/SidebarLeft.vue';
@@ -31,7 +31,7 @@ onBeforeMount(() => { if (isAuth) void $router.push({ name: ROUTE_NAME.MAIN }) }
                 <SidebarLink label="Inicio" :icon="mdiHome" :to="{ name: ROUTE_NAME.GUEST_HOME }" />
                 <SidebarLink label="Ingresar" :icon="mdiAccount" :to="{ name: ROUTE_NAME.MAIN }" />
                 <SidebarLink label="Compartir" :icon="mdiShare" @click="share" />
-                <SidebarLink label="Acerca de Ally" :icon="mdiHelp" :to="{ name: ROUTE_NAME.GUEST_ABOUT }" />
+                <SidebarLink label="Acerca de Ally" :icon="mdiInformation" :to="{ name: ROUTE_NAME.GUEST_ABOUT }" />
             </SidebarGroup>
 
         </SidebarLeft>

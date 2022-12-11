@@ -27,13 +27,13 @@ import AdriCQContact from '@/components/widgets/AdriCQContact.vue'
                         Códigos QR</RouterLink> con varias funciones como Llamar, Enviar SMS, Acceder a una Web, etc.
                 </p>
                 <p>Ally es de uso 100% gratuito hoy, mañana y siempre</p>
-                <p class="text-center mt-4">Este proyecto fue desarrollado por <a
+                <!-- <p class="text-center mt-4">Este proyecto fue desarrollado por <a
                         class="text-green-800 dark:text-yellow-300" href="https://github.com/AdriCQ"
-                        target="_blank">AdriCQ</a><!--
+                        target="_blank">AdriCQ</a>
                     gracias a <a href="https://www.servimav.com" target="_blank" class="text-green-800">SERVIMAV
-                        S.R.L</a> --></p>
+                        S.R.L</a></p> -->
 
-                <p class="text-center">Si te gustó y quieres apoyarme no dudes en escribir</p>
+                <p class="text-center">Si te gustó y quieres apoyarme comparte y sígueme en mis redes</p>
 
                 <AdriCQContact />
             </div>

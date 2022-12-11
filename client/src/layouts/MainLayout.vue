@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { onBeforeMount, ref } from 'vue';
-import { mdiAccount, mdiHelp, mdiApplication, mdiShare, mdiWeatherNight, mdiHome, mdiCreditCard, mdiAccountMultiple } from '@mdi/js';
+import { mdiAccount, mdiInformation, mdiShare, mdiWeatherNight, mdiQrcode, mdiCreditCard, mdiAccountMultiple } from '@mdi/js';
 import { useTheme, share, useNotify } from '@/helpers'
 import NavBar from '@/components/layouts/NavBar.vue';
 import SidebarLeft from '@/components/layouts/sidebar/SidebarLeft.vue';
@@ -39,7 +39,7 @@ onBeforeRouteUpdate(() => { sidebar.value = false })
         <!-- Navbar end -->
         <SidebarLeft v-model="sidebar">
             <SidebarGroup label="Colecciones">
-                <SidebarLink label="Crear QR" :icon="mdiApplication" :to="{ name: ROUTE_NAME.MAIN }" />
+                <SidebarLink label="Crear QR" :icon="mdiQrcode" :to="{ name: ROUTE_NAME.MAIN }" />
                 <SidebarLink label="Métodos de Pago" :icon="mdiCreditCard" :to="{ name: ROUTE_NAME.MAIN_PAYMENT }" />
                 <SidebarLink label="Referidos" :icon="mdiAccountMultiple" :to="{ name: ROUTE_NAME.MAIN_REFERAL }" />
             </SidebarGroup>
@@ -49,7 +49,7 @@ onBeforeRouteUpdate(() => { sidebar.value = false })
             </SidebarGroup>
             <SidebarGroup label="Comparte">
                 <SidebarLink label="Compartir" :icon="mdiShare" @click="share()" />
-                <SidebarLink label="Acerca de Ally" :icon="mdiHelp" :to="{ name: ROUTE_NAME.MAIN_ABOUT }" />
+                <SidebarLink label="Acerca de Ally" :icon="mdiInformation" :to="{ name: ROUTE_NAME.MAIN_ABOUT }" />
             </SidebarGroup>
             <!-- <SidebarGroup label="Crear Qr">
                 <SidebarLink :label="t.label" v-for="(t, key) in BASIC_TYPES" :key="`sidebar-type-${key}`"
