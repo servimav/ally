@@ -18,5 +18,5 @@ export default defineConfig({
         outDir: '../public/ui/',
         emptyOutDir: true,
     },
-    // base: '/ui/'
+    base: '/ui/'
 })

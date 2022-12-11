@@ -16,7 +16,7 @@ function onAuth() {
 </script>
 
 <template>
-    <div class="bg-primary-low sm:bg-white min-h-screen pt-10 sm:py-none">
+    <div class="bg-primary-low min-h-screen pt-10 sm:py-none">
         <div class="container mx-auto">
             <div class="flex flex-wrap">
                 <div class="w-full px-2">
