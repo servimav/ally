@@ -2,6 +2,7 @@ export interface IUserProfile {
     id: number;
     email: string;
     name: string;
+    nick: string;
     avatar: string;
 }
 
@@ -25,6 +26,7 @@ export interface IUserRequestLogin {
 export interface IUserRequestRegister {
     email: string;
     name: string;
+    nick: string;
     password: string;
     password_confirmation: string;
 }

@@ -48,12 +48,21 @@ onBeforeMount(async () => {
             v-if="!form">Añadir</button>
         <UserPaymentForm :update="selected" v-if="form" @completed="onComplete" />
 
-        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12 gap-2 mt-2" v-else>
-            <div v-for="(m, k) in myMethods.methods" :key="`${k}`">
-                <PaymentMethod class="w-full" :method="(getMethod(m.payment_id) as IPaymentMethod)"
-                    v-if="getMethod(m.payment_id)" :label="m.name" @click="onSelect(m)" />
-            </div>
-        </div>
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+            <li v-for="(m, k) in myMethods.methods" :key="`${m.payment_id}-${k}`"
+                class="flex items-center border shadow-lg p-2 bg-white rounded-md cursor-pointer" @click="onSelect(m)">
+                <div class="w-8">
+                    <img :src="getMethod(m.payment_id)?.image" />
+                </div>
+                <div class="pl-4">{{ m.name }}</div>
+            </li>
+        </ul>
     </div>
 
 </template>
+
+<style scoped>
+.pm {
+    min-height: 6rem;
+}
+</style>

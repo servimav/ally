@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserPaymentResource;
+use App\Models\User;
 use App\Models\UserPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -11,7 +12,7 @@ class UserPaymentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth:sanctum']);
+        $this->middleware(['auth:sanctum'])->except(['byNick']);
     }
     /**
      * index
@@ -50,5 +51,25 @@ class UserPaymentController extends Controller
             ]);
         }
         return $model->save() ? new UserPaymentResource($model) : $this->sendErrorReponse();
+    }
+
+    /**
+     * byNick
+     * @param Request request
+     * @return Illuminate\Http\JsonResponse
+     */
+    public function byNick(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nick' => ['required', 'string']
+        ]);
+        if ($validator->fails()) {
+            return $this->sendErrorReponse();
+        }
+        $validator = $validator->validate();
+        $model = User::query()->where('nick', $validator['nick'])->first();
+        return $model && $model->payment ?
+            new UserPaymentResource($model->payment)
+            : $this->sendErrorReponse();
     }
 }

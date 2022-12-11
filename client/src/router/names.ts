@@ -13,5 +13,6 @@ export enum ROUTE_NAME {
 
     QR_GENERATE = 'QR.GENERATE',
     // Public
-    PUBLIC_QR = 'PUBLIC.QR'
+    PUBLIC_QR = 'PUBLIC.QR',
+    PUBLIC_PAYMENT = 'PUBLIC.PAYMENT',
 }

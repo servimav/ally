@@ -5,6 +5,7 @@ import AuthLayout from '@/layouts/AuthLayout.vue';
 import { AuthGuard } from './authGuard';
 import GuestLayoutVue from '@/layouts/GuestLayout.vue';
 import QrLayoutVue from '@/layouts/QrLayout.vue';
+import PaymentLayout from '@/layouts/PaymentLayout.vue';
 
 
 export const routes: RouteRecordRaw[] = [
@@ -68,6 +69,10 @@ export const routes: RouteRecordRaw[] = [
         children: [
             { path: ':name/:slug', name: ROUTE_NAME.PUBLIC_QR, component: () => import('@/pages/PublicQrPage.vue') },
         ]
+    }, {
+        path: '/payme/:nick',
+        component: PaymentLayout,
+        name: ROUTE_NAME.PUBLIC_PAYMENT,
     },
     // {
     //     path: '/:catchAll(.*)*',

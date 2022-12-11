@@ -27,4 +27,5 @@ Route::prefix('payments')->group(function () {
     Route::get('', [UserPaymentController::class, 'index']);
     Route::post('', [UserPaymentController::class, 'store']);
     Route::get('available', [PaymentController::class, 'index']);
+    Route::get('by-nick', [UserPaymentController::class, 'byNick']);
 });

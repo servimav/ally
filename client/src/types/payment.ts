@@ -1,3 +1,5 @@
+import { IUserProfile } from './user';
+
 export type IPaymentMethodType = 'CRYPTO' | 'WALLET' | 'BANK';
 
 export interface IPaymentMethod {
@@ -16,4 +18,5 @@ export interface IUserPaymentData {
 export interface IUserPayment {
     id: number;
     methods: IUserPaymentData[];
+    user?: IUserProfile;
 }

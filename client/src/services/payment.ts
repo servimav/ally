@@ -24,6 +24,12 @@ export function useUserPayment(api: AxiosInstance) {
          * @returns
          */
         available: () => api.get<IPaymentMethod[]>(`${baseUrl}/available`),
+        /**
+         * byNick
+         * @param nick
+         * @returns
+         */
+        byNick: (nick: string) => api.get<IUserPayment>(`${baseUrl}/by-nick`, { params: { nick } }),
     }
 
 }
