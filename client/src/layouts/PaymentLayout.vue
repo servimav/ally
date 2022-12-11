@@ -4,10 +4,11 @@ import { useService } from '@/services';
 import { usePaymentStore } from '@/store';
 import type { IUserPayment, IUserPaymentData } from '@/types';
 import { onBeforeMount, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
 import QrCode from '@/components/widgets/QrCode.vue';
 import { mdiClose, mdiContentCopy } from '@mdi/js';
 import { useClipboard } from '@vueuse/core';
+import { ROUTE_NAME } from '@/router';
 
 const $route = useRoute();
 const { axiosError, success, error } = useNotify()
@@ -42,8 +43,8 @@ async function loadData(nick: string) {
     try {
         const resp = await payment.byNick(nick);
         userPayment.value = resp.data;
-    } catch (error) {
-        axiosError(error)
+    } catch (err) {
+        error('No hay enlaces para mostrar')
     }
 }
 
@@ -57,9 +58,14 @@ onBeforeMount(async () => {
 <template>
     <div class="p-4 sm:px-16 md:p-24 lg:px-32 min-h-screen bg-primary-low relative">
         <div class="p-2 sm:p-8">
+            <div class="p-2 text-slate-300 mb-4 text-center shadow-md">
+                <RouterLink :to="{ name: ROUTE_NAME.MAIN }">
+                    Crea tu colección de Métodos de Pago
+                </RouterLink>
+            </div>
             <!-- User info -->
             <div class="w-36 mx-auto rounded-full bg-white">
-                <img src="/vite.svg" class="w-full" />
+                <img src="/vite.svg" title="Ally Logo" class="w-full" />
             </div>
             <div class="mt-2 text-white text-2xl text-center">{{ userPayment?.user?.name }}</div>
             <!-- / User info -->

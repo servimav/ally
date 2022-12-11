@@ -1,4 +1,4 @@
-import { $api } from './axios'
+import { $api, baseURL } from './axios'
 import { useQrService } from './qr';
 import { useUserPayment } from './payment';
 import { useAuthService } from './user';
@@ -15,4 +15,4 @@ function useService() {
     }
 }
 
-export { $api, useService }
+export { $api, useService, baseURL }

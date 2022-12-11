@@ -1,10 +1,10 @@
 <script setup lang='ts'>
 import { onBeforeMount, computed, ref } from 'vue';
 import UserPaymentForm from '@/components/forms/payment/UserPaymentForm.vue';
-import PaymentMethod from '@/components/widgets/PaymentMethod.vue';
+import MyPaymentLink from '@/components/widgets/MyPaymentLink.vue';
 import { useNotify } from '@/helpers';
 import { usePaymentStore } from '@/store';
-import type { IPaymentMethod, IUserPaymentData } from '@/types'
+import type { IUserPaymentData } from '@/types';
 const { axiosError } = useNotify();
 const Payment = usePaymentStore();
 /**
@@ -32,6 +32,7 @@ async function onComplete() {
     await Payment.listMine()
 }
 
+
 onBeforeMount(async () => {
     try {
         await Payment.list();
@@ -44,13 +45,16 @@ onBeforeMount(async () => {
 
 <template>
     <div class="p-2">
-        <button class="btn-primary-low dark:btn-primary" @click.prevent="() => { selected = undefined; form = true }"
-            v-if="!form">Añadir</button>
+        <MyPaymentLink class="mb-2" />
+        <button class="btn-primary-low
+                dark:bg-primary dark:text-slate-100 dark:border-primary-low"
+            @click.prevent="() => { selected = undefined; form = true }" v-if="!form">Añadir</button>
         <UserPaymentForm :update="selected" v-if="form" @completed="onComplete" />
 
-        <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2" v-else>
             <li v-for="(m, k) in myMethods.methods" :key="`${m.payment_id}-${k}`"
-                class="flex items-center border shadow-lg p-2 bg-white rounded-md cursor-pointer" @click="onSelect(m)">
+                class="flex items-center border shadow-lg p-2 bg-white rounded-md cursor-pointer dark:bg-primary-low dark:border-slate-300 dark:text-slate-200"
+                @click="onSelect(m)">
                 <div class="w-8">
                     <img :src="getMethod(m.payment_id)?.image" />
                 </div>

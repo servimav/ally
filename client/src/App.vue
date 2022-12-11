@@ -13,7 +13,7 @@ const $router = useRouter();
 
 onBeforeMount(async () => {
     load();
-    if (isAuth) { getProfile(); void $router.push({ name: ROUTE_NAME.MAIN }); }
+    if (isAuth) { await getProfile(); void $router.push({ name: ROUTE_NAME.MAIN }); }
 })
 
 </script>

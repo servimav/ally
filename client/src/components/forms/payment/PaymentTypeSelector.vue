@@ -25,17 +25,17 @@ onBeforeMount(async () => {
             <PaymentMethod @click="$emit('select', m)" v-for="(m, k) in favMethods" :key="`fav-${m.id}-${k}`"
                 :method="m" />
         </div>
-        <div class="text-2xl text-center">Billeteras</div>
+        <div class="text-2xl text-center">E-WALLETS</div>
         <div :class="gridClass">
             <PaymentMethod @click="$emit('select', m)" v-for="(m, k) in walletMethods" :key="`wallet-${m.id}-${k}`"
                 :method="m" />
         </div>
-        <div class="text-2xl text-center">Tarjetas</div>
+        <div class="text-2xl text-center">BANCOS</div>
         <div :class="gridClass">
             <PaymentMethod @click="$emit('select', m)" v-for="(m, k) in cardMethods" :key="`cards-${m.id}-${k}`"
                 :method="m" />
         </div>
-        <div class="text-2xl text-center">Crypto</div>
+        <div class="text-2xl text-center">CRYPTO</div>
         <div :class="gridClass">
             <PaymentMethod @click="$emit('select', m)" v-for="(m, k) in cryptoMethods" :key="`crypto-${m.id}-${k}`"
                 :method="m" />
