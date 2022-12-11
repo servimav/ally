@@ -15,6 +15,7 @@ Route::prefix('auth')->group(function () {
     Route::get('', [AuthController::class, 'profile']);
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);
+    Route::post('update', [AuthController::class, 'updateProfile']);
 });
 
 Route::get('public-qr', [QrController::class, 'publicQr']);

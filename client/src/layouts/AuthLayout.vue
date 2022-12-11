@@ -21,10 +21,10 @@ function onAuth() {
             <div class="flex flex-wrap">
                 <div class="w-full px-2">
                     <div
-                        class="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-primary-low sm:py-10 px-10 text-center sm:px-12 md:px-[60px]">
-                        <div class="mb-10 text-center md:mb-16">
-                            <a href="javascript:void(0)" class="mx-auto inline-block max-w-[160px]">
-                                <img src="/vite.svg" alt="logo" />
+                        class="relative mx-auto max-w-sm overflow-hidden rounded-lg p-10 sm:py-10 text-center sm:px-12 md:px-[60px]">
+                        <div class="text-center md:mb-16">
+                            <a href="javascript:void(0)" class="mx-auto inline-block max-w-[72px]">
+                                <img src="/vite.svg" class="w-full" alt="logo" />
                             </a>
                         </div>
 

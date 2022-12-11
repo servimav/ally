@@ -16,7 +16,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:sanctum')->only(['profile']);
+        $this->middleware('auth:sanctum')->only(['profile', 'updateProfile']);
     }
     /**
      * Login
@@ -70,6 +70,38 @@ class AuthController extends Controller
     public function profile()
     {
         return new UserResource(auth()->user());
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => ['nullable', 'string'],
+            'enail' => ['email', 'email'],
+            'nick' => ['nullable', 'string'],
+            'password' => ['nullable', 'confirmed', 'string']
+        ]);
+        if ($validator->fails()) {
+            return $this->sendErrorReponse($validator->errors());
+        }
+        $validator = $validator->validate();
+        $user = User::find(auth()->id());
+        if (isset($validator['password'])) {
+            $validator['password'] = bcrypt($validator['password']);
+        } else
+            unset($validator['password']);
+        if (isset($validator['nick'])) {
+            $exists = User::query()->where('nick', $validator['nick'])->first();
+            if ($exists && $exists->id !== $user->id)
+                return $this->sendErrorReponse('El nick está usado');
+        }
+        if (isset($validator['email'])) {
+            $exists = User::query()->where('email', $validator['email'])->first();
+            if ($exists && $exists->id !== $user->id)
+                return $this->sendErrorReponse('El email está usado');
+        }
+        return $user->update($validator)
+            ? $this->authResponse($user)
+            : $this->sendErrorReponse();
     }
     /**
      * authResponse

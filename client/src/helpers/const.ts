@@ -1,5 +1,5 @@
 import type { IIconLabelLink, IQrType } from '@/types';
-import { mdiContacts, mdiLink, mdiPencil, mdiSend, mdiWhatsapp, mdiWifi, mdiFood, mdiMessage, mdiPhone } from '@mdi/js';
+import { mdiContacts, mdiLink, mdiPencil, mdiSend, mdiWhatsapp, mdiWifi, mdiFood, mdiMessage, mdiPhone, mdiEmail } from '@mdi/js';
 
 export interface IIconWidget extends IIconLabelLink {
     type?: IQrType;
@@ -32,6 +32,10 @@ export const BASIC_TYPES: IIconWidget[] = [
         icon: mdiMessage,
         label: 'Mensaje',
         type: 'SMS'
+    }, {
+        icon: mdiEmail,
+        label: 'Email',
+        type: 'EMAIL'
     }, {
         icon: mdiWhatsapp,
         label: 'Whatsapp',

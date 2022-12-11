@@ -64,7 +64,7 @@ function profileClick() {
 
 
                 <div class="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
-                    <div class="flex flex-shrink-0 items-center">
+                    <div class="flex flex-shrink-0 items-center rounded-full">
                         <img class="block h-8 w-auto sm:hidden" src="/vite.svg" alt="Ally Logo">
 
                         <img class="hidden h-8 w-auto lg:block" src="/vite.svg" alt="Ally Logo">
@@ -72,13 +72,13 @@ function profileClick() {
                     <div class="hidden sm:ml-8 sm:block">
                         <div class="flex space-x-4">
                             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                            <RouterLink :to="{ name: ROUTE_NAME.MAIN_MYQR }"
+                            <RouterLink :to="{ name: ROUTE_NAME.MAIN }"
                                 class="bg-primary hover:bg-primary-low text-white px-3 py-2 rounded-md text-sm font-medium"
                                 aria-current="page">QR</RouterLink>
 
                             <RouterLink :to="{ name: ROUTE_NAME.MAIN_PAYMENT }"
                                 class="text-gray-300 hover:bg-primary-low hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                                Pagos</RouterLink>
+                                Métodos de Pagos</RouterLink>
 
                             <RouterLink :to="{ name: ROUTE_NAME.MAIN_REFERAL }"
                                 class="text-gray-300 hover:bg-primary-low hover:text-white px-3 py-2 rounded-md text-sm font-medium">

@@ -18,7 +18,15 @@ const { form } = useQrForm($props, $emit)
 function onSubmit() {
     let d = form.value.data;
     if (form.value.type === 'TEL')
-        d = `tel:${form.value.data}`
+        d = `tel:${form.value.data}`;
+    else if (form.value.type === 'SMS')
+        d = `smsto:${form.value.data}`;
+    else if (form.value.type === 'EMAIL')
+        d = `mailto:${form.value.data}`;
+    else if (form.value.type === 'WHATSAPP')
+        d = `https://wa.me/${form.value.data}`;
+    else if (form.value.type === 'TELEGRAM')
+        d = `https://t.me/${form.value.data}`;
     $emit('complete', 'create', { ...form.value, data: d });
 }
 </script>
@@ -37,6 +45,14 @@ function onSubmit() {
 
             <InputText type="tel" v-if="type === 'TEL'" placeholder="55555555" v-model="form.data"
                 id-key="input-qr-data-tel" label="Telefono" required />
+            <InputText type="tel" v-if="type === 'SMS'" placeholder="55555555" v-model="form.data"
+                id-key="input-qr-data-sms" label="Telefono" required />
+            <InputText type="tel" v-if="type === 'WHATSAPP'" placeholder="55555555" v-model="form.data"
+                id-key="input-qr-data-whatsapp" label="Telefono" required />
+            <InputText type="text" v-if="type === 'TELEGRAM'" placeholder="MyUser" v-model="form.data"
+                id-key="input-qr-data-telegram" label="Usuario" required />
+            <InputText type="email" v-if="type === 'EMAIL'" placeholder="myemail@email.com" v-model="form.data"
+                id-key="input-qr-data-email" label="Email" required />
 
             <InputText type="text" v-if="type === 'WALLET'" v-model="form.data" id-key="input-qr-data-wallet"
                 label="Wallet" required />

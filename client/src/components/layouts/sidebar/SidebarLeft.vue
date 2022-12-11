@@ -8,7 +8,7 @@ defineEmits<{ (e: 'update:model-value', v: boolean): void }>();
 <template>
     <div class="z-20 navbar-menu relative ">
         <nav :class="{ 'show': modelValue }"
-            class="pt-[6rem] lg:translate-x-0 sidebar h-screen fixed left-0 top-0 flex w-64 -translate-x-full flex-col overflow-y-auto bg-primary-low dark:bg-primary pb-8 sm:max-w-sm">
+            class="pt-[6rem] lg:translate-x-0 sidebar h-screen fixed left-0 top-0 flex w-72 -translate-x-full flex-col overflow-y-auto bg-primary-low dark:bg-primary pb-8 sm:max-w-sm">
             <slot></slot>
             <div class="mt-auto text-gray-100 text-center text-sm font-light">
                 Creado con <span>

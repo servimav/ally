@@ -29,8 +29,8 @@ onBeforeRouteUpdate(() => { sidebar.value = false })
         <!-- Navbar end -->
         <SidebarLeft v-model="sidebar">
             <SidebarGroup label="Colecciones">
-                <SidebarLink label="QR" :icon="mdiApplication" :to="{ name: ROUTE_NAME.MAIN }" />
-                <SidebarLink label="Pagos" :icon="mdiCreditCard" :to="{ name: ROUTE_NAME.MAIN_PAYMENT }" />
+                <SidebarLink label="Crear QR" :icon="mdiApplication" :to="{ name: ROUTE_NAME.MAIN }" />
+                <SidebarLink label="Métodos de Pago" :icon="mdiCreditCard" :to="{ name: ROUTE_NAME.MAIN_PAYMENT }" />
                 <SidebarLink label="Referidos" :icon="mdiAccountMultiple" :to="{ name: ROUTE_NAME.MAIN_REFERAL }" />
             </SidebarGroup>
             <SidebarGroup label="Ajustes">
@@ -46,7 +46,7 @@ onBeforeRouteUpdate(() => { sidebar.value = false })
                     :icon="t.icon" />
             </SidebarGroup> -->
         </SidebarLeft>
-        <div class="pt-16 lg:ml-64">
+        <div class="pt-16 lg:ml-72">
             <router-view />
         </div>
     </div>

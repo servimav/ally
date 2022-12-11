@@ -24,6 +24,12 @@ export function useAuthService(api: AxiosInstance) {
          * @param p
          * @returns
          */
-        register: (p: IUserRequestRegister) => api.post<IUserResponseAuth>(`${baseUrl}/register`, p)
+        register: (p: IUserRequestRegister) => api.post<IUserResponseAuth>(`${baseUrl}/register`, p),
+        /**
+         * update
+         * @param p
+         * @returns
+         */
+        update: (p: Partial<IUserRequestRegister>) => api.post<IUserResponseAuth>(`${baseUrl}/update`, p)
     }
 }

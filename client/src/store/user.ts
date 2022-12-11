@@ -27,10 +27,8 @@ export const useUserStore = defineStore(STORE_KEY, () => {
      */
     async function login(p: IUserRequestLogin) {
         const resp = await services.auth.login(p);
-        profile.value = resp.data.profile;
-        api_token.value = resp.data.token;
-        save();
-        return resp.data;
+        return handleAuth(resp.data);
+
     }
     /**
      * getProfile
@@ -49,10 +47,16 @@ export const useUserStore = defineStore(STORE_KEY, () => {
      */
     async function register(p: IUserRequestRegister) {
         const resp = await services.auth.register(p);
-        profile.value = resp.data.profile;
-        api_token.value = resp.data.token;
-        save();
-        return resp.data;
+        return handleAuth(resp.data);
+    }
+    /**
+     * update
+     * @param p
+     * @returns
+     */
+    async function update(p: Partial<IUserRequestRegister>) {
+        const resp = await services.auth.update(p);
+        return handleAuth(resp.data);
     }
 
     function logout() {
@@ -88,12 +92,19 @@ export const useUserStore = defineStore(STORE_KEY, () => {
         }
     }
 
+    function handleAuth(data: IUserResponseAuth) {
+        profile.value = data.profile;
+        api_token.value = data.token;
+        save();
+        return data;
+    }
+
 
     return {
         api_token, profile, isAuth,
         // Methods
         load, save,
         // Actions
-        logout, login, getProfile, register
+        logout, login, getProfile, register, update
     }
 })

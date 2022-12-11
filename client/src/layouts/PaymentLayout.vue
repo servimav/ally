@@ -82,7 +82,7 @@ onBeforeMount(async () => {
                 <div class="float-right ml-2 cursor-pointer w-4 h-4" @click.prevent="selected = undefined">
                     <BaseIcon :path="mdiClose" size="16" />
                 </div>
-                <QrCode :data="selected.data" :scale="12" class="mt-4" />
+                <QrCode :data="selected.data" :scale="12" downloadable class="mt-4" />
                 <div class="flex items-center border shadow-lg p-2 rounded-md">
                     <div class="w-8">
                         <img :src="getById(selected.payment_id)?.image" />
