@@ -1,13 +1,17 @@
 <script setup lang='ts'>
 import { onBeforeMount, ref } from 'vue';
-import { mdiAccount, mdiGithub, mdiApplication, mdiShare, mdiWeatherNight, mdiHome, mdiCreditCard, mdiAccountMultiple } from '@mdi/js';
-import { useTheme, share } from '@/helpers'
+import { mdiAccount, mdiHelp, mdiApplication, mdiShare, mdiWeatherNight, mdiHome, mdiCreditCard, mdiAccountMultiple } from '@mdi/js';
+import { useTheme, share, useNotify } from '@/helpers'
 import NavBar from '@/components/layouts/NavBar.vue';
 import SidebarLeft from '@/components/layouts/sidebar/SidebarLeft.vue';
 import SidebarGroup from '@/components/layouts/sidebar/SidebarGroup.vue';
 import SidebarLink from '@/components/layouts/sidebar/SidebarLink.vue';
 import { ROUTE_NAME } from '@/router';
 import { onBeforeRouteUpdate } from 'vue-router';
+import { usePaymentStore } from '@/store';
+
+const { axiosError } = useNotify()
+const { list, listMine } = usePaymentStore()
 
 const sidebar = ref(false);
 
@@ -15,9 +19,15 @@ function toggleDark() {
     useTheme().toggleDark();
 }
 
-onBeforeMount(() => {
+onBeforeMount(async () => {
     if (useTheme().is() === 'dark')
         useTheme().setDark();
+    try {
+        list();
+        listMine();
+    } catch (error) {
+        axiosError(error)
+    }
 });
 onBeforeRouteUpdate(() => { sidebar.value = false })
 
@@ -38,8 +48,8 @@ onBeforeRouteUpdate(() => { sidebar.value = false })
                 <SidebarLink label="Cuenta" :icon="mdiAccount" :to="{ name: ROUTE_NAME.MAIN_PROFILE }" />
             </SidebarGroup>
             <SidebarGroup label="Comparte">
-                <SidebarLink label="Compartir" :icon="mdiShare" @click="share" />
-                <SidebarLink label="GitHub" :icon="mdiGithub" />
+                <SidebarLink label="Compartir" :icon="mdiShare" @click="share()" />
+                <SidebarLink label="Acerca de Ally" :icon="mdiHelp" :to="{ name: ROUTE_NAME.MAIN_ABOUT }" />
             </SidebarGroup>
             <!-- <SidebarGroup label="Crear Qr">
                 <SidebarLink :label="t.label" v-for="(t, key) in BASIC_TYPES" :key="`sidebar-type-${key}`"

@@ -3,8 +3,10 @@ export enum ROUTE_NAME {
     AUTH = 'AUTH.AUTH',
     // Guest
     GUEST_HOME = 'GUEST.HOME',
+    GUEST_ABOUT = 'GUEST.ABOUT',
     // Main
     MAIN = 'MAIN',
+    MAIN_ABOUT = 'MAIN.ABOUT',
     MAIN_GENERATE = 'MAIN.GENERATE',
     MAIN_MYQR = 'MAIN.MYQR',
     MAIN_PROFILE = 'MAIN.PROFILE',
