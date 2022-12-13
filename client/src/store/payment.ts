@@ -65,18 +65,16 @@ export const usePaymentStore = defineStore(STORE_KEY, () => {
         return (await payment.store(myMethods.value.methods)).data;
     }
 
-    async function update(p: IUserPaymentData) {
-        const index = myMethods.value.methods.findIndex(v => v.payment_id === p.payment_id);
-        if (index >= 0) {
-            myMethods.value.methods[index] = p;
+    async function update(key: number, p: IUserPaymentData) {
+        if (myMethods.value.methods[key]) {
+            myMethods.value.methods[key] = p;
         }
         return (await payment.store(myMethods.value.methods)).data;
     }
 
-    async function remove(p: IUserPaymentData) {
-        const index = myMethods.value.methods.findIndex(v => v.payment_id === p.payment_id);
-        if (index >= 0) {
-            myMethods.value.methods.splice(index, 1)
+    async function remove(key: number) {
+        if (myMethods.value.methods[key]) {
+            myMethods.value.methods.splice(key, 1)
         }
         return (await payment.store(myMethods.value.methods)).data;
     }

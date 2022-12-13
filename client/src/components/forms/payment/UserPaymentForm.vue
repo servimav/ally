@@ -8,7 +8,7 @@ import { useNotify } from '@/helpers';
 
 const Payment = usePaymentStore();
 const { axiosError } = useNotify();
-const $props = defineProps<{ update?: IUserPaymentData }>()
+const $props = defineProps<{ update?: { method: IUserPaymentData, key: number } }>()
 const $emit = defineEmits<{ (e: 'completed', v: IUserPaymentData): void }>()
 /**
  * -----------------------------------------
@@ -60,9 +60,9 @@ async function onSubmit(cancel = false) {
         try {
             if ($props.update) {
                 if (cancel)
-                    await Payment.remove(form.value);
+                    await Payment.remove($props.update.key);
                 else
-                    await Payment.update(form.value);
+                    await Payment.update($props.update.key, form.value);
             }
             else {
                 if (!cancel)
@@ -75,7 +75,7 @@ async function onSubmit(cancel = false) {
     }
 }
 if ($props.update) {
-    form.value = $props.update;
+    form.value = $props.update.method;
     select.value = false;
     selected.value = Payment.getById(form.value.payment_id);
 }

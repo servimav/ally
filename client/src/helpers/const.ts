@@ -20,11 +20,11 @@ export const BASIC_TYPES: IIconWidget[] = [
         icon: mdiWifi,
         label: 'WiFi',
         type: 'WIFI'
-    }, {
+    }, /*{
         icon: mdiContacts,
         label: 'Contacto',
         type: 'VCARD'
-    }, {
+    }, */{
         icon: mdiPhone,
         label: 'Teléfono',
         type: 'TEL'

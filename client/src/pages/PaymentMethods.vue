@@ -14,15 +14,18 @@ const Payment = usePaymentStore();
  */
 
 const myMethods = computed(() => Payment.myMethods);
-const selected = ref<IUserPaymentData>();
+const selected = ref<{ method: IUserPaymentData; key: number }>();
 const form = ref(false);
 
 function getMethod(id: number) {
     return Payment.getById(id);
 }
 
-function onSelect(p: IUserPaymentData) {
-    selected.value = p;
+function onSelect(p: IUserPaymentData, key: number) {
+    selected.value = {
+        method: p,
+        key
+    }
     form.value = true
 }
 
@@ -54,7 +57,7 @@ onBeforeMount(async () => {
         <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2" v-else>
             <li v-for="(m, k) in myMethods.methods" :key="`${m.payment_id}-${k}`"
                 class="flex items-center border shadow-lg p-2 bg-white rounded-md cursor-pointer dark:bg-primary-low dark:border-slate-300 dark:text-slate-200"
-                @click="onSelect(m)">
+                @click="onSelect(m, k)">
                 <div class="w-8">
                     <img :src="getMethod(m.payment_id)?.image" />
                 </div>

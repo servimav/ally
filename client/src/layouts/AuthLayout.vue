@@ -34,10 +34,10 @@ function onAuth() {
 
                         <!-- <SocialAuth /> -->
 
-                        <a href="javascript:void(0)"
+                        <!-- <a href="javascript:void(0)"
                             class="mb-2 inline-block text-base text-[#adadad] hover:text-primary hover:underline">
                             ¿Olvidaste la Contraseña?
-                        </a>
+                        </a> -->
                         <p class="text-base text-[#adadad]">
                             <a href="javascript:void(0)" @click="login = !login" class="text-white hover:underline">
                                 {{ login ? 'Crear Cuenta' : 'Ya tengo cuenta' }}
