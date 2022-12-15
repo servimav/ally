@@ -47,7 +47,7 @@ trait HandleImage
                 Storage::disk('public')->put($filename, '');
             try {
                 InterventionImage::make($image)
-                    ->resize($resize, function ($constraints) {
+                    ->resize($resize, $resize, function ($constraints) {
                         $constraints->aspectRatio();
                     })->save(storage_path('/app/public/' . $filename));
                 return true;
