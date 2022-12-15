@@ -54,6 +54,14 @@ async function onSubmit() {
         axiosError(err);
     }
 }
+function handleImage(params: File | null) {
+    if (params) {
+        const size = params.size;
+        if (size > 1000000)
+            error('La imagen debe ser menor de 1Mb')
+        else form.value.avatar = params;
+    }
+}
 
 onBeforeMount(async () => {
     const resp = await User.getProfile();
@@ -74,7 +82,7 @@ onBeforeMount(async () => {
     <form @submit.prevent="onSubmit">
         <div class="space-y-2">
 
-            <InputImage @update:model-value="v => form.avatar = v" />
+            <InputImage @update:model-value="handleImage" />
             <InputText id-key="profile-name" v-model="form.name" label="Nombre" required />
             <InputText id-key="profile-nick" :model-value="form.nick" @update:modelValue="onNickUpdate" label="Nick"
                 required />
