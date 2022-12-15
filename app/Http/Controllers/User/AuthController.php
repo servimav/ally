@@ -108,7 +108,7 @@ class AuthController extends Controller
         }
         if (isset($validator['avatar'])) {
             $avatarName = 'avatars/avatar_' . time() . $user->id . '.jpg';
-            if ($this->imageUpload($request, $avatarName, 'avatar', 280)) {
+            if ($this->imageUpload($request, $avatarName, 'avatar', 320)) {
                 $this->imageDelete($user->avatar);
                 $validator['avatar'] = $avatarName;
             }
