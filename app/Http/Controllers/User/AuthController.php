@@ -63,7 +63,7 @@ class AuthController extends Controller
         }
         $validator = $validator->validate();
         $validator['password'] = bcrypt($validator['password']);
-        // $validator['avatar'] = '/avatars/default.svg';
+        $validator['avatar'] = 'avatars/default.svg';
         $user = new User($validator);
         $user->avatar = $this->imageDefault();
         return $user->save()
@@ -107,7 +107,7 @@ class AuthController extends Controller
                 return $this->sendErrorReponse('El email está usado');
         }
         if (isset($validator['avatar'])) {
-            $avatarName = '/avatars/avatar_' . time() . $user->id . '.jpg';
+            $avatarName = 'avatars/avatar_' . time() . $user->id . '.jpg';
             if ($this->imageUpload($request, $avatarName, 'avatar', 280)) {
                 $this->imageDelete($user->avatar);
                 $validator['avatar'] = $avatarName;
