@@ -12,7 +12,7 @@ use Intervention\Image\Facades\Image as InterventionImage;
  */
 trait HandleImage
 {
-    static public $image_default = '/avatars/default.svg';
+    static public $image_default = 'avatars/default.svg';
 
     static public function imageDefault()
     {
