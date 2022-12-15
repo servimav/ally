@@ -85,10 +85,10 @@ class AuthController extends Controller
             'email' => ['nullable', 'email'],
             'nick' => ['nullable', 'string'],
             'password' => ['nullable', 'confirmed', 'string'],
-            'avatar' => ['nullable', 'file']
+            'avatar' => ['nullable', 'file', 'max:1000000']
         ]);
         if ($validator->fails()) {
-            return $this->sendErrorReponse('El Email o Nick están siendo usados');
+            return $this->sendErrorReponse('Revise los datos enviados');
         }
         $validator = $validator->validate();
         $user = User::find(auth()->id());
