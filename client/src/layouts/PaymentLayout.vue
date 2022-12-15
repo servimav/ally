@@ -65,7 +65,8 @@ onBeforeMount(async () => {
             </div>
             <!-- User info -->
             <div class="w-36 mx-auto rounded-full bg-white">
-                <img src="/vite.svg" title="Ally Logo" class="w-full" />
+                <img :src="userPayment?.user?.avatar" :title="userPayment?.user?.name"
+                    class="w-full rounded-full object-cover" />
             </div>
             <div class="mt-2 text-white text-2xl text-center">{{ userPayment?.user?.name }}</div>
             <!-- / User info -->

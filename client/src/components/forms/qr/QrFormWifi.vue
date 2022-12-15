@@ -1,15 +1,18 @@
 <script setup lang='ts'>
 import { IQrCodeCreate, IQrCodeUpdate, IQrType, IQrWifiData } from '@/types';
 import { ref } from 'vue';
-import InputTextarea from '../inputs/InputTextarea.vue';
+import InputSelect from '../inputs/InputSelect.vue';
 import { useQrForm } from './qrForm';
-
 
 const $props = withDefaults(defineProps<{ type?: IQrType, save?: boolean }>(), {
     type: 'TEXT',
 });
 
 const $emit = defineEmits<{ (e: 'complete', type: 'create' | 'update', v: IQrCodeCreate | IQrCodeUpdate, updateId?: number): void }>()
+const wifiSecurity = [{
+    label: 'Abierta', value: 'blank'
+}];
+
 const { form } = useQrForm($props, $emit);
 const wifi = ref<IQrWifiData>({
     hidden: false,
@@ -36,7 +39,8 @@ function onSubmit() {
                 required />
 
             <InputText v-model="wifi.ssid" id-key="input-qr-wifi-ssid" label="SSID" required />
-            <InputText v-model="wifi.type" id-key="input-qr-wifi-type" label="Security" required />
+            <InputSelect v-model="wifi.type" id-key="input-qr-wifi-type" label="Security" required
+                :options="wifiSecurity" />
             <InputText v-model="wifi.password" id-key="input-qr-wifi-password" label="Password" required />
 
             <InputText v-if="save" v-model="form.slug" id-key="input-qr-slug" label="Slug" required />

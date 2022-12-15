@@ -1,5 +1,5 @@
 import { useService } from '@/services';
-import { IUserProfile, IUserRequestLogin, IUserRequestRegister, IUserResponseAuth } from '@/types';
+import { IUserProfile, IUserRequestLogin, IUserRequestRegister, IUserRequestUpdate, IUserResponseAuth } from '@/types';
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 
@@ -54,7 +54,7 @@ export const useUserStore = defineStore(STORE_KEY, () => {
      * @param p
      * @returns
      */
-    async function update(p: Partial<IUserRequestRegister>) {
+    async function update(p: Partial<IUserRequestUpdate>) {
         const resp = await services.auth.update(p);
         return handleAuth(resp.data);
     }

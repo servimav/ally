@@ -1,4 +1,4 @@
-import { IUserProfile, IUserRequestLogin, IUserRequestRegister, IUserResponseAuth } from '@/types';
+import { IUserProfile, IUserRequestLogin, IUserRequestRegister, IUserRequestUpdate, IUserResponseAuth } from '@/types';
 import { AxiosInstance } from 'axios';
 
 export function useAuthService(api: AxiosInstance) {
@@ -30,6 +30,8 @@ export function useAuthService(api: AxiosInstance) {
          * @param p
          * @returns
          */
-        update: (p: Partial<IUserRequestRegister>) => api.post<IUserResponseAuth>(`${baseUrl}/update`, p)
+        update: (p: IUserRequestUpdate) => api.post<IUserResponseAuth>(`${baseUrl}/update`, p, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+        })
     }
 }

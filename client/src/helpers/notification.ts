@@ -22,7 +22,7 @@ export const useNotify = createGlobalState(
          * axiosError
          * @param message
          */
-        function axiosError(err: AxiosError | unknown) {
+        function axiosError(err: AxiosError | unknown, text = 'Ha ocurrido un error') {
             const typedError = err as AxiosError;
             console.log({ typedError })
             const message = typedError.response?.data;
@@ -35,7 +35,7 @@ export const useNotify = createGlobalState(
                 error('No tiene privilegios');
                 void $router.push({ name: ROUTE_NAME.AUTH })
             } else
-                error(stringMsg);
+                error(stringMsg ? stringMsg : text);
             return stringMsg;
         }
         /**

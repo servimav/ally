@@ -82,7 +82,7 @@ if ($props.update) {
 </script>
 
 <template>
-    <form @submit.prevent="onSubmit(false)">
+    <form @submit.prevent="onSubmit(false)" autocomplete="off">
         <Card>
             <PaymentMethod v-if="selected" :method="selected" class="w-16" @click="select = true" />
             <PaymentTypeSelector v-if="select" @select="onSelectType" />

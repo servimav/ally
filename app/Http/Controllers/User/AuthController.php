@@ -4,13 +4,17 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Http\Traits\HandleImage;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+    use HandleImage;
     /**
      * Constructor
      */
@@ -30,7 +34,7 @@ class AuthController extends Controller
             'password' => ['required', 'string'],
         ]);
         if ($validator->fails()) {
-            return $this->sendErrorReponse($validator->errors());
+            return $this->sendErrorReponse('Revise los datos enviados');
         }
         $validator = $validator->validate();
 
@@ -55,11 +59,13 @@ class AuthController extends Controller
             'password' => ['required', 'confirmed', 'string']
         ]);
         if ($validator->fails()) {
-            return $this->sendErrorReponse($validator->errors());
+            return $this->sendErrorReponse('El Email o Nick están siendo usados');
         }
         $validator = $validator->validate();
         $validator['password'] = bcrypt($validator['password']);
+        // $validator['avatar'] = '/avatars/default.svg';
         $user = new User($validator);
+        $user->avatar = $this->imageDefault();
         return $user->save()
             ? $this->authResponse($user)
             : $this->sendErrorReponse();
@@ -76,12 +82,13 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => ['nullable', 'string'],
-            'enail' => ['email', 'email'],
+            'email' => ['nullable', 'email'],
             'nick' => ['nullable', 'string'],
-            'password' => ['nullable', 'confirmed', 'string']
+            'password' => ['nullable', 'confirmed', 'string'],
+            'avatar' => ['nullable', 'file']
         ]);
         if ($validator->fails()) {
-            return $this->sendErrorReponse($validator->errors());
+            return $this->sendErrorReponse('El Email o Nick están siendo usados');
         }
         $validator = $validator->validate();
         $user = User::find(auth()->id());
@@ -98,6 +105,13 @@ class AuthController extends Controller
             $exists = User::query()->where('email', $validator['email'])->first();
             if ($exists && $exists->id !== $user->id)
                 return $this->sendErrorReponse('El email está usado');
+        }
+        if (isset($validator['avatar'])) {
+            $avatarName = '/avatars/avatar_' . time() . $user->id . '.jpg';
+            if ($this->imageUpload($request, $avatarName, 'avatar', 280)) {
+                $this->imageDelete($user->avatar);
+                $validator['avatar'] = $avatarName;
+            }
         }
         return $user->update($validator)
             ? $this->authResponse($user)

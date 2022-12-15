@@ -38,7 +38,7 @@ class UserPaymentController extends Controller
             'methods.*.data' => ['required', 'string']
         ]);
         if ($validator->fails()) {
-            return response()->json($validator->errors()->toArray(), 400, [], JSON_NUMERIC_CHECK);
+            return $this->sendErrorReponse('Verifique los datos enviados');
         }
         $validator = $validator->validate();
         $model = auth()->user()->payment;
@@ -64,7 +64,7 @@ class UserPaymentController extends Controller
             'nick' => ['required', 'string']
         ]);
         if ($validator->fails()) {
-            return $this->sendErrorReponse();
+            return $this->sendErrorReponse('Verifique los datos enviados');
         }
         $validator = $validator->validate();
         $model = User::query()->where('nick', $validator['nick'])->first();

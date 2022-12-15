@@ -30,3 +30,8 @@ export interface IUserRequestRegister {
     password: string;
     password_confirmation: string;
 }
+
+
+export interface IUserRequestUpdate extends Partial<IUserRequestRegister> {
+    avatar?: File | null;
+}

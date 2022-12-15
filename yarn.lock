@@ -1766,6 +1766,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"object-to-formdata@npm:^4.4.2":
+  version: 4.4.2
+  resolution: "object-to-formdata@npm:4.4.2"
+  checksum: 2fc65ffb257adcafa92fcd3dea14945461f7f7669b17bb7dba481f0df0d6f92d5dacbc3148bd5eb86bfdf44fd4f6bad7902cf1478f37d336fd20a256f9913f28
+  languageName: node
+  linkType: hard
+
 "once@npm:^1.3.0":
   version: 1.4.0
   resolution: "once@npm:1.4.0"
@@ -2430,6 +2437,7 @@ __metadata:
     autoprefixer: ^10.4.13
     axios: ^1.2.0
     dotenv: ^16.0.3
+    object-to-formdata: ^4.4.2
     path: ^0.12.7
     pinia: ^2.0.27
     postcss: ^8.4.19

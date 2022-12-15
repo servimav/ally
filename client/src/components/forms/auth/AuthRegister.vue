@@ -31,6 +31,11 @@ function onNickUpdate(nick: string) {
 
 async function onSubmit() {
     try {
+        if (form.value.nick) {
+            const lastIndex = form.value.nick.length - 1;
+            if (lastIndex && form.value.nick[lastIndex] === '-')
+                form.value.nick = form.value.nick.slice(0, lastIndex)
+        }
         const resp = await User.register(form.value);
         $emit('auth', resp)
     } catch (error) {
