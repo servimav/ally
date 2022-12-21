@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { onBeforeMount, ref } from 'vue';
-import { mdiAccount, mdiInformation, mdiShare, mdiWeatherNight, mdiQrcode, mdiCreditCard, mdiAccountMultiple } from '@mdi/js';
+import { mdiAccount, mdiInformation, mdiShare, mdiWeatherNight, mdiQrcode, mdiCreditCard, mdiAccountMultiple, mdiStore } from '@mdi/js';
 import { useTheme, share, useNotify } from '@/helpers'
 import NavBar from '@/components/layouts/NavBar.vue';
 import SidebarLeft from '@/components/layouts/sidebar/SidebarLeft.vue';
@@ -41,7 +41,8 @@ onBeforeRouteUpdate(() => { sidebar.value = false })
             <SidebarGroup label="Colecciones">
                 <SidebarLink label="Crear QR" :icon="mdiQrcode" :to="{ name: ROUTE_NAME.MAIN }" />
                 <SidebarLink label="Métodos de Pago" :icon="mdiCreditCard" :to="{ name: ROUTE_NAME.MAIN_PAYMENT }" />
-                <SidebarLink label="Referidos" :icon="mdiAccountMultiple" :to="{ name: ROUTE_NAME.MAIN_REFERAL }" />
+                <SidebarLink label="Catálogo" :icon="mdiStore" :to="{ name: ROUTE_NAME.MAIN_CATALOG }" />
+                <!-- <SidebarLink label="Referidos" :icon="mdiAccountMultiple" :to="{ name: ROUTE_NAME.MAIN_REFERAL }" /> -->
             </SidebarGroup>
             <SidebarGroup label="Ajustes">
                 <SidebarLink label="Modo Oscuro" :icon="mdiWeatherNight" @click="toggleDark" />

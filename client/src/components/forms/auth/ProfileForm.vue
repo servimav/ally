@@ -45,7 +45,6 @@ async function onSubmit() {
                 nullsAsUndefineds: true,
                 booleansAsIntegers: true,
             });
-            console.log({ formData: form.value.nick })
             const resp = await User.update(formData as IUserRequestUpdate);
             success('Perfil actualizado');
             $emit('complete', resp);
@@ -82,7 +81,7 @@ onBeforeMount(async () => {
     <form @submit.prevent="onSubmit">
         <div class="space-y-2">
 
-            <InputImage @update:model-value="handleImage" />
+            <InputImage @update:model-value="handleImage" :img="User.profile?.avatar" />
             <InputText id-key="profile-name" v-model="form.name" label="Nombre" required />
             <InputText id-key="profile-nick" :model-value="form.nick" @update:modelValue="onNickUpdate" label="Nick"
                 required />

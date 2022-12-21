@@ -80,22 +80,22 @@ function profileClick() {
                                 class="text-gray-300 hover:bg-primary-low hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                                 Métodos de Pagos</RouterLink>
 
-                            <RouterLink :to="{ name: ROUTE_NAME.MAIN_REFERAL }"
+                            <RouterLink :to="{ name: ROUTE_NAME.MAIN_CATALOG }"
                                 class="text-gray-300 hover:bg-primary-low hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                                Referidos</RouterLink>
+                                Catálogo</RouterLink>
                         </div>
                     </div>
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                     <div class="hidden md:block">
-                        <button type="button"
+                        <a href="https://github.com/servimav/ally" target="_blank"
                             class="inline-flex items-center justify-center rounded-md p-2 text-gray-400">
                             <span class="sr-only">Github</span>
                             <svg class="block h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" :d="mdiGithub" />
                             </svg>
-                        </button>
+                        </a>
                     </div>
                     <!-- Profile dropdown -->
                     <div class="relative ml-3">

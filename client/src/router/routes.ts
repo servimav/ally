@@ -5,7 +5,8 @@ import AuthLayout from '@/layouts/AuthLayout.vue';
 import { AuthGuard } from './authGuard';
 import GuestLayoutVue from '@/layouts/GuestLayout.vue';
 import QrLayoutVue from '@/layouts/QrLayout.vue';
-import PaymentLayout from '@/layouts/PaymentLayout.vue';
+import PublicPayment from '@/pages/PublicPayment.vue';
+import PublicCatalogVue from '@/pages/PublicCatalog.vue';
 
 
 export const routes: RouteRecordRaw[] = [
@@ -52,6 +53,11 @@ export const routes: RouteRecordRaw[] = [
                 component: () => import('@/pages/GenerateQr.vue')
             },
             {
+                path: 'catalog',
+                name: ROUTE_NAME.MAIN_CATALOG,
+                component: () => import('@/pages/CatalogPage.vue')
+            },
+            {
                 path: 'profile',
                 name: ROUTE_NAME.MAIN_PROFILE,
                 component: () => import('@/pages/MyProfile.vue')
@@ -79,8 +85,12 @@ export const routes: RouteRecordRaw[] = [
         ]
     }, {
         path: '/payme/:nick',
-        component: PaymentLayout,
+        component: PublicPayment,
         name: ROUTE_NAME.PUBLIC_PAYMENT,
+    },{
+        path: '/cat/:nick',
+        component: PublicCatalogVue,
+        name: ROUTE_NAME.PUBLIC_CATALOG,
     },
     // {
     //     path: '/:catchAll(.*)*',

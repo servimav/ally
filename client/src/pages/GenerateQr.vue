@@ -56,11 +56,11 @@ onBeforeMount(() => {
 
 <template>
     <div class="p-2">
-        <template v-if="showForm">
+        <div v-if="showForm" class="max-w-md">
             <QrFormWifi v-if="type === 'WIFI'" @complete="onComplete" />
             <QrForm v-else :type="type" @complete="onComplete" />
-        </template>
-        <div class="text-center mt-4 p-2">
+        </div>
+        <div class="text-center mt-4 p-2 max-w-md">
             <QrCode :data="qr" v-if="qr" :scale="10" downloadable />
         </div>
     </div>

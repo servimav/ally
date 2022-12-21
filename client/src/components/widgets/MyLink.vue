@@ -6,11 +6,23 @@ import { useClipboard } from '@vueuse/core';
 import { baseURL } from '@/services'
 import { computed } from 'vue';
 
+const $props = defineProps<{ type: 'qr' | 'payment' | 'catalog' }>()
+
 const { copy, copied, isSupported } = useClipboard();
 const { error, success } = useNotify();
 const User = useUserStore();
 
-const myUrl = computed(() => `${baseURL}/payme/${User.profile?.nick}`)
+const myUrl = computed(() => {
+    switch ($props.type) {
+        case 'payment':
+            return `${baseURL}/payme/${User.profile?.nick}`;
+        case 'catalog':
+            return `${baseURL}/cat/${User.profile?.nick}`;
+        case 'qr':
+            return `${baseURL}/qr/${User.profile?.nick}`
+        default: return ''
+    }
+})
 
 /**
  * copyData

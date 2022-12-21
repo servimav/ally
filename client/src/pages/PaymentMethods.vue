@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import { onBeforeMount, computed, ref } from 'vue';
 import UserPaymentForm from '@/components/forms/payment/UserPaymentForm.vue';
-import MyPaymentLink from '@/components/widgets/MyPaymentLink.vue';
+import MyPaymentLink from '@/components/widgets/MyLink.vue';
 import { useNotify } from '@/helpers';
 import { usePaymentStore } from '@/store';
 import type { IUserPaymentData } from '@/types';
@@ -48,11 +48,11 @@ onBeforeMount(async () => {
 
 <template>
     <div class="p-2">
-        <MyPaymentLink class="mb-2" />
+        <MyPaymentLink type="payment" class="mb-2" />
         <button class="btn-primary-low
                 dark:bg-primary dark:text-slate-100 dark:border-primary-low"
             @click.prevent="() => { selected = undefined; form = true }" v-if="!form">Añadir</button>
-        <UserPaymentForm :update="selected" v-if="form" @completed="onComplete" />
+        <UserPaymentForm class="max-w-md" :update="selected" v-if="form" @completed="onComplete" />
 
         <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2" v-else>
             <li v-for="(m, k) in myMethods.methods" :key="`${m.payment_id}-${k}`"

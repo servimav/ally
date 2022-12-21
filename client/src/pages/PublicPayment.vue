@@ -11,7 +11,7 @@ import { useClipboard } from '@vueuse/core';
 import { ROUTE_NAME } from '@/router';
 
 const $route = useRoute();
-const { axiosError, success, error } = useNotify()
+const { success, error } = useNotify()
 const { payment } = useService()
 const { list, getById } = usePaymentStore()
 
@@ -57,9 +57,10 @@ onBeforeMount(async () => {
 
 <template>
     <div class="p-4 sm:px-16 md:p-24 lg:px-32 min-h-screen bg-primary-low relative">
+
         <div class="p-2 sm:p-8">
             <div class="p-2 text-slate-300 mb-4 text-center shadow-md">
-                <RouterLink :to="{ name: ROUTE_NAME.MAIN }">
+                <RouterLink :to="{ name: ROUTE_NAME.MAIN_PAYMENT }">
                     Crea tu colección de Métodos de Pago
                 </RouterLink>
             </div>
@@ -108,6 +109,5 @@ onBeforeMount(async () => {
             </Card>
         </div>
         <!-- Popup -->
-
     </div>
 </template>

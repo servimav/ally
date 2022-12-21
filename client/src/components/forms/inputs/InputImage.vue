@@ -1,11 +1,8 @@
 <script setup lang='ts'>
-import { useUserStore } from '@/store';
-import { computed } from 'vue';
 
+const $props = defineProps<{ img?: string }>()
 const $emit = defineEmits<{ (e: 'update:model-value', v: File | null): void }>();
 
-const User = useUserStore();
-const avatar = computed(() => User.profile?.avatar)
 
 function updateValue(ev: Event) {
     const target = ev.target;
@@ -16,8 +13,8 @@ function updateValue(ev: Event) {
 </script>
 
 <template>
-    <div class="shrink-0">
-        <img class="object-cover w-32 h-32 rounded-full" :src="avatar" alt="profile photo" />
+    <div class="shrink-0" v-if="img">
+        <img class="object-cover w-32 h-32 rounded-full" :src="img" alt="profile photo" />
     </div>
     <label class="block">
         <span class="sr-only">Seleccionar Avatar</span>
