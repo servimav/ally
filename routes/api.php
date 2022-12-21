@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QrController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\UserPaymentController;
@@ -20,9 +21,11 @@ Route::prefix('auth')->group(function () {
 
 Route::get('public-qr', [QrController::class, 'publicQr']);
 
-Route::apiResources([
-    'qr' => QrController::class,
-]);
+Route::apiResource('qr', QrController::class);
+
+Route::get('products/by-nick', [ProductController::class, 'byNick']);
+Route::apiResource('products', ProductController::class)->except(['update']);
+Route::post('products/{id}', [ProductController::class, 'update']);
 
 Route::prefix('payments')->group(function () {
     Route::get('', [UserPaymentController::class, 'index']);

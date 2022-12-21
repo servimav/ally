@@ -55,4 +55,9 @@ class User extends \TCG\Voyager\Models\User
     {
         return $this->hasOne(UserPayment::class);
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
