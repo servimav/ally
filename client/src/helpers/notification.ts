@@ -32,7 +32,7 @@ export const useNotify = createGlobalState(
 
             if (typedError.response?.status === 401) {
                 User.logout();
-                error('No tiene privilegios');
+                error('Debe autenticarse');
                 void $router.push({ name: ROUTE_NAME.AUTH })
             } else
                 error(stringMsg ? stringMsg : text);
