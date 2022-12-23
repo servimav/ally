@@ -39,7 +39,14 @@ async function copyData() {
 }
 
 function shareMyLink() {
-    share(`Metodos de Pago de ${User.profile?.name}`, myUrl.value)
+    switch ($props.type) {
+        case 'catalog':
+            return share(`Catálogo de ${User.profile?.name}`, myUrl.value);
+        case 'payment':
+            return share(`Métodos de Pago de ${User.profile?.name}`, myUrl.value);
+        default:
+            return
+    }
 }
 </script>
 

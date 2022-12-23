@@ -46,7 +46,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return ProductResource::collection(Product::query()->where('onsale', '=', true)->get());
+        return ProductResource::collection(Product::query()->where([
+            ['onsale', true],
+            ['user_id', auth()->id()],
+        ])->get());
     }
 
     /**
@@ -115,6 +118,7 @@ class ProductController extends Controller
         $validator = $validator->validate();
         $model = Product::find($id);
         if (!$model) return $this->sendErrorReponse('No existe el producto');
+        if (!$model->user_id !== auth()->id()) return $this->sendErrorReponse('No esta autorizado');
 
         if (isset($validator['image'])) {
             $imageName = 'products/product_' . time() . auth()->id() . '.jpg';
