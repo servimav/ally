@@ -118,7 +118,7 @@ class ProductController extends Controller
         $validator = $validator->validate();
         $model = Product::find($id);
         if (!$model) return $this->sendErrorReponse('No existe el producto');
-        if (!$model->user_id !== auth()->id()) return $this->sendErrorReponse('No esta autorizado');
+        if ($model->user_id !== auth()->id()) return $this->sendErrorReponse('No esta autorizado');
 
         if (isset($validator['image'])) {
             $imageName = 'products/product_' . time() . auth()->id() . '.jpg';
@@ -141,6 +141,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $model = Product::find($id);
+        if ($model->user_id !== auth()->id()) return $this->sendErrorReponse('No esta autorizado');
         if ($model->image)
             $this->imageDelete($model->image);
         if (!$model) return $this->sendErrorReponse('No existe el producto');
