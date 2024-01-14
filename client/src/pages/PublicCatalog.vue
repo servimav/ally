@@ -97,7 +97,8 @@ onBeforeMount(async () => {
         <!-- Popup -->
         <div class="absolute top-0 left-0 h-full w-full" @click="selected = undefined" v-if="selected && !sm">
         </div>
-        <div class="fixed top-0 left-0 p-4 sm:px-16 md:px-48 lg:px-64 xl:px-96 w-screen" v-if="selected && !sm">
+        <div @click="selected = undefined" class="fixed top-0 left-0 p-4 sm:px-16 md:px-48 lg:px-64 xl:px-96 w-screen"
+            v-if="selected && !sm">
             <Card class="text-center w-full z-20">
                 <ProductWidget :product="selected" full />
             </Card>
