@@ -7,10 +7,21 @@ import { RouterLink, useRoute } from 'vue-router';
 import { ROUTE_NAME } from '@/router';
 import ProductWidget from '@/components/widgets/ProductWidget.vue';
 import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
+/**
+ * ------------------------------------------
+ *	Utils
+ * ------------------------------------------
+ */
 
 const $route = useRoute();
 const { error } = useNotify();
 const { product } = useService();
+
+/**
+ * ------------------------------------------
+ *	Data
+ * ------------------------------------------
+ */
 
 const user = ref<IUserProfile>();
 const products = ref<IProduct[]>([])
@@ -18,11 +29,27 @@ const selected = ref<IProduct>();
 
 const sm = useBreakpoints(breakpointsTailwind).sm;
 
+/**
+ * ------------------------------------------
+ *	Methods
+ * ------------------------------------------
+ */
 
+/**
+ * select
+ * @param p
+ */
 function select(p: IProduct) {
-    selected.value = p;
+    if (selected.value)
+        selected.value = undefined
+    else
+        selected.value = p;
 }
 
+/**
+ * loadData
+ * @param nick
+ */
 async function loadData(nick: string) {
     try {
         const resp = await product.byNick(nick);
@@ -33,6 +60,12 @@ async function loadData(nick: string) {
         error('No hay enlaces para mostrar')
     }
 }
+
+/**
+ * ------------------------------------------
+ *	Lifecycle
+ * ------------------------------------------
+ */
 
 onBeforeMount(async () => {
     const nick = $route.params.nick.toString() ?? '';
